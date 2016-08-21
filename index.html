@@ -13,13 +13,8 @@
     Number.isNaN = window.isNaN;
     var app={
       exchange: 0.06,
-      set_exchange: function (exchanges) {
-        for (var i = 0; i < exchanges.length; i++) {
-          if(exchanges[i].code.trim() == 'JPY'){
-            this.exchange = exchanges[i].refePrice/100;
-            return;
-          }
-        }
+      set_exchange: function (exchange) {
+        this.exchange = exchange.rates['CNY'];
       },
       itemKinds: [{
         id: 0,
@@ -743,6 +738,6 @@
       document.getElementById('react-main')
     );
     </script>
-    <script type="text/javascript" src="http://data.bank.hexun.com/other/cms/fxjhjson.ashx?callback=app.set_exchange"></script>
+    <script type="text/javascript" src="https://api.fixer.io/latest?base=JPY&symbols=CNY&callback=app.set_exchange"></script>
   </body>
 </html>
