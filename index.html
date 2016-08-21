@@ -13,8 +13,13 @@
     Number.isNaN = window.isNaN;
     var app={
       exchange: 0.06,
-      set_exchange: function (exchange) {
-        this.exchange = exchange;
+      set_exchange: function (exchanges) {
+        for (var i = 0; i < exchanges.length; i++) {
+          if(exchanges[i].code.trim() == 'JPY'){
+            this.exchange = exchanges[i].refePrice/100;
+            return;
+          }
+        }
       },
       itemKinds: [{
         id: 0,
@@ -327,7 +332,7 @@
       }],
       remarks: [{
         id: 1,
-        words: '支付宝汇率：萌购与玛莎使用支付宝平台转换日元并以日元结算，支付宝需要支付3%国际结算手续费，即汇率*1.03',
+        words: '支付宝汇率：萌购与玛莎使用支付宝平台转换日元并以日元结算，支付宝需要支付3%国际结算手续费，即汇率*1.03，由于本站汇率实时更新，可能会与支付宝汇率相差0.5%',
         link:'https://global.alipay.com/product/websitepayment.htm'
       },{
         id: 2,
@@ -738,5 +743,6 @@
       document.getElementById('react-main')
     );
     </script>
+    <script type="text/javascript" src="http://data.bank.hexun.com/other/cms/fxjhjson.ashx?callback=app.set_exchange"></script>
   </body>
 </html>
