@@ -1,0 +1,22 @@
+{
+  "name": "japan-shipping-calc",
+  "version": "0.9.0",
+  "description": "A calculator to calculating fees from japanese shopping websites to China.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xingoxu/works/tree/master/buy-calc"
+  },
+  "scripts": {
+    "start": "gulp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "xingo",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-react": "^6.11.1",
+    "browser-sync": "^2.14.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-sourcemaps": "^1.6.0"
+  }
+}

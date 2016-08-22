@@ -1,0 +1,20 @@
+{
+  "name": "japan-shipping-calc",
+  "description": "A calculator to calculating fees from japanese shopping websites to China.",
+  "main": "",
+  "authors": [
+    "xingo"
+  ],
+  "license": "MIT",
+  "homepage": "https://works.xingoxu.com/buy-calc/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "^15.3.1"
+  }
+}
