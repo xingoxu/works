@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>我怎么就是管不住这手呢？ - 日系剁手网站综合价格对比工具</title>
-    <link rel="shortcut icon" href=" /favicon.ico" />
+    <link rel="shortcut icon" href="favicon.ico?20160822" />
     <script src="build/react.js"></script>
     <script src="build/react-dom.js"></script>
     <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
@@ -103,7 +103,7 @@
       shoppingSite: [{
         id: 0,
         name: '萌购',
-        itemremark: '商品价格（+日本国内运费）* 8% * 支付宝汇率[1] + 代购手续费 0%~6%',
+        itemremark: '(商品价格* 8%（+日本国内运费）)* 支付宝汇率[1] + 代购手续费 0%~6%',
         itemprice: function (price) {
           return Math.ceil(price*1.08*app.exchange*1.03);
         },
@@ -201,15 +201,18 @@
         }],
         accordings: [{
           key: '费用构成/代购手续费',
-          value: 'http://www.030buy.net/help/article?article_id=31'
+          value: 'http://www.030buy.net/help/article?article_id=31',
+          newWindow: true
         },{
           key: '团发运费',
-          value: 'http://www.030buy.net/help/article?article_id=30'
+          value: 'http://www.030buy.net/help/article?article_id=30',
+          newWindow: true
         },{
           key: '重量计算/包装重量计算 [2]',
-          value: 'http://www.030buy.cc/help/article?article_id=34'
+          value: 'http://www.030buy.cc/help/article?article_id=34',
+          newWindow: true
         }]
-      },{
+      },{                                                                        // 030buy end masadora start
         id: 1,
         name: '玛莎多拉',
         itemremark: '(商品价格*8%(+日本国内运费)+ 手续费(+2%保价费))* 支付宝汇率[1]',
@@ -319,12 +322,353 @@
         }],
         accordings: [{
           key: '费用构成/包装手续费',
-          value: 'http://www.masadora.net/help/%E8%B4%AD%E7%89%A9%E6%8C%87%E5%8D%97-%E8%B4%B9%E7%94%A8%E6%9E%84%E6%88%90.htm'
+          value: 'http://www.masadora.net/help/%E8%B4%AD%E7%89%A9%E6%8C%87%E5%8D%97-%E8%B4%B9%E7%94%A8%E6%9E%84%E6%88%90.htm',
+          newWindow: true
         },{
           key: '重量计算/包装重量计算 [3]',
-          value: 'http://www.masadora.net/help/%E5%8F%91%E9%80%81%E8%AF%B4%E6%98%8E-%E5%8F%91%E9%80%81%E6%96%B9%E5%BC%8F.htm'
+          value: 'http://www.masadora.net/help/%E5%8F%91%E9%80%81%E8%AF%B4%E6%98%8E-%E5%8F%91%E9%80%81%E6%96%B9%E5%BC%8F.htm',
+          newWindow: true
         }]
-      }],
+      },{                                                                          //masadora end 任你购start
+        id: 2,
+        name: '任你购',
+        itemremark: '(商品价格* 8%（+日本国内运费）)* 支付宝汇率[1] (+ 代购手续费 5%)',
+        itemprice: function (price) {
+          return Math.ceil(price*1.08*app.exchange*1.03);
+        },
+        japanShipmentPrice: function (shipment) {
+          return Math.ceil(shipment*app.exchange*1.03);
+        },
+        otherBuyFees: [{
+          id: 0,
+          name: '代购手续费',
+          input_type: 'text',
+          input_calc: function (elem) {
+            return Number.parseInt(elem.value) ? Number.parseInt(elem.value) : 0;
+          },
+          is_rmb: true,
+        }],
+        //重量计算
+        weightCalc: function (weight) {
+          return Math.ceil(weight/50)*50;
+        },
+        //包装计算器
+        wrapperCalc: function (weight) {
+          if(weight<=3000)
+            return 300;
+          return weight*0.1;
+        },
+        methods: [{
+          id: 0,
+          name: 'EMS',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[2].wrapperCalc(weight);
+            return Math.ceil(app.generalPrices['EMS'](weight)*app.exchange*1.03);
+          },
+          remark: 'EMS价格*支付宝汇率',
+        },{
+          id: 1,
+          name: 'SAL',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[2].wrapperCalc(weight);
+            return Math.ceil(app.generalPrices['SAL'](weight)*1.1*app.exchange*1.03);
+          },
+          remark: 'SAL价格*1.1包装手续费*支付宝汇率',
+        },{
+          id: 2,
+          name: 'AIR',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[2].wrapperCalc(weight);
+            return Math.ceil(app.generalPrices['AIR'](weight)*1.1*app.exchange*1.03);
+          },
+          remark: 'AIR价格*1.1包装手续费*支付宝汇率',
+        },{
+          id: 3,
+          name: '萌购国际小包',
+          price: function (weight) {
+            weight += app.shoppingSite[2].wrapperCalc(weight);
+            if(weight<=500){
+              return 30;
+            }
+            return Math.ceil((weight-500)/100)*5+30;
+          },
+          remark: '萌购国际小包价格'
+        },{
+          id: 4,
+          name: '香港邮政E特快',
+          price: function (weight) {
+            //设定单价
+            var singlePrice = [60,85,110,135,160,185,210,235,260,285,310,335,360];
+
+            weight += app.shoppingSite[0].wrapperCalc(weight);//0 is 030buy's id
+            return singlePrice[(Math.ceil((weight<=500 ? 501 : weight)/500)-2)];
+          },
+          remark: '萌购E特快价格'
+        },{
+          id: 5,
+          name: 'SAL小型包裹',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[2].wrapperCalc(weight);
+            return Math.ceil((app.generalPrices['mSAL'](weight)+200)*app.exchange*1.03);
+          },
+          remark: '小型包裹SAL价格*1.1包装手续费*支付宝汇率',
+        },{
+          id: 6,
+          name: 'AIR小型包裹',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[2].wrapperCalc(weight);
+            return Math.ceil((app.generalPrices['mAIR'](weight)+200)*app.exchange*1.03);
+          },
+          remark: '小型包裹AIR价格*1.1包装手续费*支付宝汇率',
+        }],
+        accordings: [{
+          key: '费用构成/代购手续费',
+          value: 'http://rennigou.jp/help/01_03',
+          newWindow: true
+        }],
+      },{                                                                                         //任你购end 2poi start
+        id: 3,
+        name: '2poi',
+        itemremark: '(商品价格* 8%（+日本国内运费）)* 汇率*1.04（国际结算手续费）(+代购手续费 5%)',
+        itemprice: function (price) {
+          return Math.ceil(price*1.08*app.exchange*1.04);
+        },
+        japanShipmentPrice: function (shipment) {
+          return Math.ceil(shipment*app.exchange*1.04);
+        },
+        otherBuyFees: [{
+          id: 0,
+          name: '代购手续费',
+          input_type: 'text',
+          input_calc: function (elem) {
+            return Number.parseInt(elem.value) ? Number.parseInt(elem.value) : 0;
+          },
+          is_rmb: true,
+        }],
+        //重量计算
+        weightCalc: function (weight) {
+          return weight;
+        },
+        //包装计算器
+        wrapperCalc: function (weight) {
+          return 0;
+        },
+        methods: [{
+          id: 0,
+          name: 'EMS',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[3].wrapperCalc(weight);
+            return Math.round(app.generalPrices['EMS'](weight)*app.exchange*1.04*1000)/1000;//处理总体以日元结算的费用时，精确到小数点后3位
+          },
+          remark: 'EMS价格*汇率*1.04（国际结算手续费）',
+        },{
+          id: 1,
+          name: 'SAL',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[3].wrapperCalc(weight);
+            return Math.round(app.generalPrices['SAL'](weight)*1.1*app.exchange*1.04*1000)/1000;
+          },
+          remark: 'SAL价格*1.1包装手续费*汇率*1.04（国际结算手续费）',
+        },{
+          id: 2,
+          name: 'AIR',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[3].wrapperCalc(weight);
+            return Math.round(app.generalPrices['AIR'](weight)*1.1*app.exchange*1.04*1000)/1000;
+          },
+          remark: 'AIR价格*1.1包装手续费*汇率*1.04（国际结算手续费）',
+        },{
+          id: 3,
+          name: 'SAL小型包裹',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[3].wrapperCalc(weight);
+            return Math.round((app.generalPrices['mSAL'](weight)+200)*app.exchange*1.04*1000)/1000;
+          },
+          remark: '（小型包裹SAL价格+200日元）*汇率*1.04（国际结算手续费）',
+        },{
+          id: 4,
+          name: 'AIR小型包裹',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[3].wrapperCalc(weight);
+            return Math.round((app.generalPrices['mAIR'](weight)+200)*app.exchange*1.04*1000)/1000;
+          },
+          remark: '（小型包裹AIR价格+200日元）*汇率*1.04（国际结算手续费）',
+        }],
+        accordings: [{
+          key: '费用构成/代购手续费/国际结算手续费',
+          value: 'http://2poi.jp/help/02_03',
+          newWindow: true
+        },{
+          key: '2poi备注',
+          value: '#according-4'
+        }],
+      },{                                                                                         //2poi end fromJapan start
+        id: 4,
+        name: 'fromJapan',
+        itemremark: '（商品价格*8%（+日本国内运费）)*汇率[5]*1.05（系统使用费）',
+        itemprice: function (price) {
+          return Math.round(price*1.08*app.exchange*1.05*1000)/1000;
+        },
+        japanShipmentPrice: function (shipment) {
+          return Math.round(shipment*app.exchange*1.05*1000)/1000;
+        },
+        otherBuyFees: [],
+        //重量计算
+        weightCalc: function (weight) {
+          return weight;
+        },
+        //包装计算器
+        wrapperCalc: function (weight) {
+          return 0;
+        },
+        methods: [{
+          id: 0,
+          name: 'EMS',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[3].wrapperCalc(weight);
+            return Math.round(app.generalPrices['EMS'](weight)*app.exchange*1.05*1000)/1000;
+          },
+          remark: 'EMS价格*1.05（系统使用费）',
+        },{
+          id: 1,
+          name: 'SAL',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[3].wrapperCalc(weight);
+            return Math.round(app.generalPrices['SAL'](weight)*app.exchange*1.05*1000)/1000;
+          },
+          remark: 'SAL价格*1.05（系统使用费）',
+        },{
+          id: 2,
+          name: 'AIR',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[3].wrapperCalc(weight);
+            return Math.round(app.generalPrices['AIR'](weight)*app.exchange*1.05*1000)/1000;
+          },
+          remark: 'AIR价格*1.05（系统使用费）',
+        },{
+          id: 3,
+          name: 'SAL小型包裹',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[3].wrapperCalc(weight);
+            return Math.round(app.generalPrices['mSAL'](weight)*app.exchange*1.05*1000)/1000;
+          },
+          otherType: 'checkbox',//410日元挂号服务
+          other_input_calc: function (elem,item) {
+            if(elem.checked)
+              return Math.round(410*app.exchange*1.05*1000)/1000;
+            return 0;
+          },
+          otherUnit: '410日元挂号服务',
+          remark: '小型包裹SAL价格*1.05（系统使用费）',
+        },{
+          id: 4,
+          name: 'AIR小型包裹',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[3].wrapperCalc(weight);
+            return Math.round(app.generalPrices['mAIR'](weight)*app.exchange*1.05*1000)/1000;
+          },
+          otherType: 'checkbox',//410日元挂号服务
+          other_input_calc: function (elem,item) {
+            if(elem.checked)
+              return Math.round(410*app.exchange*1.05*1000)/1000;
+            return 0;
+          },
+          otherUnit: '410日元挂号服务',
+          remark: '小型包裹AIR价格*1.05（系统使用费）',
+        }],
+        accordings: [{
+          key: '费用构成',
+          value: 'http://www.fromjapan.co.jp/cn/title/charge',
+          newWindow: true
+        },{
+          key: 'fromJapan备注',
+          value: '#according-6'
+        }],
+      },{                                                                                         //fromJapan end cdJapan start
+        id: 5,
+        name: 'cdJapan',
+        itemremark: '商品价格*汇率[5]',
+        itemprice: function (price) {
+          return Math.round(price*app.exchange*1000)/1000;
+        },
+        japanShipmentPrice: function (shipment) {
+          return Math.round(shipment*app.exchange*1000)/1000;
+        },
+        otherBuyFees: [],
+        //重量计算
+        weightCalc: function (weight) {
+          return weight;
+        },
+        //包装计算器
+        wrapperCalc: function (weight) {
+          return 0;
+        },
+        methods: [{
+          id: 0,
+          name: 'EMS',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[3].wrapperCalc(weight);
+            return Math.round(app.generalPrices['EMS'](weight)*app.exchange*1000)/1000;
+          },
+          remark: 'EMS价格',
+        },{
+          id: 1,
+          name: 'SAL小型包裹',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[3].wrapperCalc(weight);
+            return Math.round(app.generalPrices['mSAL'](weight)*app.exchange*1000)/1000;
+          },
+          otherType: 'checkbox',//410日元挂号服务
+          other_input_calc: function (elem,item) {
+            if(elem.checked)
+              return Math.round(410*app.exchange*1000)/1000;
+            return 0;
+          },
+          otherUnit: '410日元挂号服务',
+          remark: '小型包裹SAL价格',
+        },{
+          id: 2,
+          name: 'AIR小型包裹',
+          price: function (weight) {
+            //包装计算
+            weight += app.shoppingSite[3].wrapperCalc(weight);
+            return Math.round(app.generalPrices['mAIR'](weight)*app.exchange*1000)/1000;
+          },
+          otherType: 'checkbox',//410日元挂号服务
+          other_input_calc: function (elem,item) {
+            if(elem.checked)
+              return Math.round(410*app.exchange*1000)/1000;
+            return 0;
+          },
+          otherUnit: '410日元挂号服务',
+          remark: '小型包裹AIR价格',
+        }],
+        accordings: [{
+          key: '运费计算',
+          value: 'http://www.cdjapan.co.jp/guide/help/shipping/shipping_charge',
+          newWindow: true
+        },{
+          key: 'cdJapan备注',
+          value: '#according-7'
+        }],
+      }],                                                                       //shoppingSite end
       remarks: [{
         id: 1,
         words: '支付宝汇率：萌购与玛莎使用支付宝平台转换日元并以日元结算，支付宝需要支付3%国际结算手续费，即汇率*1.03，由于本站汇率实时更新，可能会与支付宝汇率相差0.5%',
@@ -335,6 +679,18 @@
       },{
         id: 3,
         words: '玛莎多拉的包装计算方式为：少于1000g为200g，大于1000g为20%'
+      },{
+        id: 4,
+        words: '2poi的虎穴无代购手续费与日本国内运费，其他网站代购手续费正实行免费，代购手续费一栏可以保持为0。2poi的重量计算为实际重量计算，因此，包裹的重量为实际重量，实际的2poi国际运费会比计算器中的费用略大，请知悉。'
+      },{
+        id:5,
+        words: '汇率：银行卡汇率，各银行不同（即时购汇），使用信用卡支付时也有可能会被银行收取货币转换费，计算器使用的汇率为当前实时汇率，因此可能会比真实费用少，请向发卡行咨询更多信息。'
+      },{
+        id: 6,
+        words: 'fromJapan重量同2poi为实际重量，计算器所算得包裹重量与运费未计入包装。fromJapan存在会员等级折扣，由FJ点数支付的部分也免除5%系统使用费，暂时未提供计算。'
+      },{
+        id: 7,
+        words: '计算重量为实际重量，包装重量约为30~100g。cdJapan的小型SAL与AIR与实际付款可能存在50日元+的误差，请以官方计算器为准。'
       }],
       cart:[],
     };
@@ -345,7 +701,7 @@
 
     </div>
     <script type="text/babel">
-    var realTimeStorage = {};//methodid: {japanShipment: }
+    var realTimeStorage = {};//{ methodid: {japanShipment: japanShipment}}
 
 
     var ShippingMethods = React.createClass({
@@ -458,11 +814,11 @@
             <td>{site.name}</td>
             <td>
               <p>{item.price ? item.price : 0}日元
-              {//日本国内运费
+              { //日本国内运费
                 japanShipmentPrice ?
                 ' + '+ item.japanShipment+'日元 ' : ''
               }
-              {
+              { //其他可能的手续费等费用
                 Array.isArray(site.otherBuyFees) ?
                 site.otherBuyFees.map(function (otherBuyFee) {
                   var insert =
@@ -485,18 +841,18 @@
                       </label>;
                       break;
                     case 'hidden':
-                      return '';
+                      return null;
                     default:
                       return '看到这个说明你药丸！';
                       break;
                     }
                   })();
-                  return <span key={otherBuyFee.id}>{otherBuyFee.input_type!='hidden' ? ' + ' : ''}
-                  {//其他可能的费用
+                  return <span key={otherBuyFee.id}>{otherBuyFee.input_type!='hidden' ? ' + ' : null}
+                  {
                     insert
                   }
                   </span>
-                }) : ''
+                }) : null
               }
               => {japanPrice}元</p>
               <p>计算公式：{site.itemremark}</p>
@@ -505,9 +861,9 @@
               <ShippingMethods methods={site.methods} item={item} japanPrice={japanPrice} siteid={site.id} />
             </td>
             <td>
-            {
+            { //根据
               site.accordings.map(function (according) {
-                return <p key={according.key}><a href={according.value} target="_blank">{according.key}</a></p>
+                return <p key={according.key}><a href={according.value} target={according.newWindow ? '_blank': null}>{according.key}</a></p>
               })
             }
             </td>
@@ -605,13 +961,13 @@
           {//玛莎或者其他可能的扩展 直发拼团可自定义运费
             (method.otherType&&method.otherType!='hidden') ?
             <span><input type={method.otherType} name={method.id} onChange={this.handleOtherInput} />{method.otherUnit}</span> :
-            ''
+            null
           }
           {
             method.chinaMethod ?
               <span>
               此发送方式还需要支付国内运费，暂时无法将国内运费加入比较，请等待版本更新
-              </span> : ''
+              </span> : null
           }
           </li>
           <li>
@@ -689,7 +1045,7 @@
             {//选择物品种类
               this.props.app.itemKinds.map(function (itemKind) {
                 return <label key={itemKind.id}>
-                  <input type="radio" name="itemkind" value={itemKind.id} defaultChecked={item.itemKind==itemKind.id}/>
+                  <input type="radio" name="itemKind" value={itemKind.id} defaultChecked={item.itemKind==itemKind.id}/>
                   {itemKind.name}
                 </label>
               })
@@ -726,7 +1082,7 @@
           备注：
           {
             this.props.app.remarks.map(function (remark) {
-              return <li key={remark.id}>{remark.words} {remark.link ? <a href={remark.link}>详情链接</a> : '' }</li>
+              return <li key={remark.id} id={'according-'+remark.id}>{remark.words} {remark.link ? <a href={remark.link}>详情链接</a> : '' }</li>
             })
           }
           </ol>
