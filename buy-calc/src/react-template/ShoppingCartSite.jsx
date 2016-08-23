@@ -75,8 +75,8 @@ var ShoppingCartSite = React.createClass({//虽然是Site但以物流的方式�
       </li>
       <li className="total-price">
         合计重量：<label className="price">{totalWeight+'g '}</label>
-        每50g运费：<label className="price">{(Number.isNaN(Math.round(totalInterNational/totalWeight*50*100)/100) ? Math.round(totalInterNational/totalWeight*50*100)/100 +'元 ' : '超重啦！')}</label>
-        合计运费：<label className="price">{(Number.isNaN(totalInterNational) ? totalInterNational+'元' : '超重啦！')}</label>
+        每50g运费：<label className="price">{(!Number.isNaN(Math.round(totalInterNational/totalWeight*50*100)/100) ? Math.round(totalInterNational/totalWeight*50*100)/100 +'元 ' : '超重啦！')}</label>
+        合计运费：<label className="price">{(!Number.isNaN(totalInterNational) ? totalInterNational+'元' : '超重啦！')}</label>
       </li>
     </ul>;
   }
