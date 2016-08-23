@@ -23,6 +23,8 @@ var MainApp = React.createClass({
       weight: '',
       japanShipment: '',
       itemKind: 99,
+      itemInputOpen: 'open',
+      itemKindOpen: 'open'
     }
   },
   calc: function (event) {
@@ -97,37 +99,54 @@ var MainApp = React.createClass({
   render: function () {
     var item = this.getItem();
     return <div className="app-wrapper">
-      <div className="top" >
+      <div className="top">
         <div className="app-title">
           <img src="dist/title-pic.jpg"></img>
           <h1>日系剁手网站<br />综合价格对比工具</h1>
         </div>
         <p className="exchange" >当前汇率：{this.props.app.exchange}</p>
-        <form className="app-title-inputs" action="javascript:;" onChange={this.calc}>
-          <section className={"item-inputs "+this.state.itemInputOpen}>
-            <div className="switch" onClick={this.switchItemInput}></div>
-            <h3>输入物品基本信息</h3>
-            <div><label className="item-input-label">物品价格（不含税）：</label><input type="text" ref="itempriceInput" value={item.price}/><label className="item-input-unit"> 日元</label></div>
-            <div><label className="item-input-label">日本国内运费（税入）：</label><input type="text" ref="japanShipmentInput" value={item.japanShipment}/><label className="item-input-unit"> 日元</label></div>
-            <div><label className="item-input-label">物品重量：</label><input type="text" ref="itemweightInput" value={item.weight}/><label className="item-input-unit small-unit"> g</label></div>
-          </section>
-          <section className={"itemKind-inputs "+this.state.itemKindOpen}>
-            <div className="switch" onClick={this.switchItemKind}></div>
-            <h3>选择物品种类</h3>
+      </div>
+      <form className="app-right-inputs" action="javascript:;" onChange={this.calc}>
+        <section className={"item-inputs "+this.state.itemInputOpen}>
+          <div className="switch" onClick={this.switchItemInput}></div>
+          <h3>输入物品基本信息</h3>
+          <div className="inputs">
+            <label className="item-input-label">物品价格（不含税）：</label>
+            <div>
+              <input type="text" ref="itempriceInput" value={item.price}/>
+              <label className="item-input-unit">日元</label>
+            </div>
+            <label className="item-input-label">日本国内运费（税入）：</label>
+            <div>
+              <input type="text" ref="japanShipmentInput" value={item.japanShipment}/>
+              <label className="item-input-unit">日元</label>
+            </div>
+            <label className="item-input-label">物品重量：</label>
+            <div>
+              <input type="text" ref="itemweightInput" value={item.weight}/>
+              <label className="item-input-unit small-unit">g</label>
+            </div>
+          </div>
+        </section>
+        <section className={"itemKind-inputs "+this.state.itemKindOpen}>
+          <div className="switch" onClick={this.switchItemKind}></div>
+          <h3>选择物品种类</h3>
+          <div className="inputs">
             <ul>
             {//选择物品种类
               this.props.app.itemKinds.map(function (itemKind) {
                 return <li>
                   <label key={itemKind.id}>
-                    <input type="radio" name="itemKind" value={itemKind.id} defaultChecked={item.itemKind==itemKind.id}/>{itemKind.name}
+                    <input type="radio" name="itemKind" value={itemKind.id}  defaultChecked={item.itemKind==itemKind.id}/>{itemKind.name}
                   </label>
                 </li>
               })
             }
             </ul>
-          </section>
-        </form>
-      </div>
+          </div>
+        </section>
+        <section className="add-cart"><button onClick={this.addToCart} disabled={ !item.shipid||!item.price||!item.weight }>加入购物车</button></section>
+      </form>
       <div className="table-wrapper">
         <form action="javascript:;" onChange={this.setShip}>
           <table>
@@ -151,7 +170,7 @@ var MainApp = React.createClass({
           </table>
         </form>
       </div>
-      <div className="right add-cart"><button onClick={this.addToCart} disabled={ item.shipid==undefined||!item.price||!item.weight }>加入购物车</button></div>
+
       <ShoppingCart ref='shoppingCart' cart={this.props.app.cart} sites={this.props.app.shoppingSite} />
       <ol className="remark-wrapper">
         备注：
@@ -161,6 +180,11 @@ var MainApp = React.createClass({
           })
         }
       </ol>
+      <footer>
+        <span>©{(new Date()).getFullYear()}</span>
+        <span> xingo | </span>
+        <a href="https://github.com/xingoxu/works/tree/master/buy-calc">GitHub Repo</a>
+      </footer>
     </div>
   }
 })

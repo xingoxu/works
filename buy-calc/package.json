@@ -21,6 +21,7 @@
     "gulp-babel": "latest",
     "gulp-clean-css": "latest",
     "gulp-less": "latest",
+    "gulp-concat": "latest",
     "gulp-sourcemaps": "latest",
     "path": "latest"
   }

@@ -15,7 +15,7 @@ var ShippingMethods = React.createClass({
     var otherInputState = this.state;
     var japanPrice = this.props.japanPrice;
     var that = this;
-    return <div>
+    return <div className="methods-wrapper">
         {
           this.props.methods.map(function (method) {
             var internationPrice = method.price(item.weight,item.itemKind);//普通计算
@@ -31,27 +31,27 @@ var ShippingMethods = React.createClass({
               japanPrice: japanPrice,
             };
 
-            return <div key={method.id}>
-              <span>
+            return <div key={method.id} className="method-wrapper">
+              <span className="method-upper">
                 <label><input type="radio" name="ship" value={radioValue} />{method.name}</label>
                 {//玛莎或者其他可能的扩展 直发拼团可自定义运费
                   (method.otherType&&method.otherType!='hidden') ?
-                  <span><input type={method.otherType} name={method.id} onChange={that.handleOtherInput} />{method.otherUnit}</span> :
-                  ''
+                  <span className="method-other-type-price"><input type={method.otherType} name={method.id} onChange={that.handleOtherInput} />{method.otherUnit}</span> :
+                  null
                 }
-                <span>{Number.isNaN(internationPrice) ? ' 超重啦！不能运送哦！' : ' => '+internationPrice+' 元 '}</span>
+                <span className="price internation-price">{Number.isNaN(internationPrice) ? ' 超重啦！不能运送哦！' : ' => '+internationPrice+' 元 '}</span>
                 {
                   method.chinaMethod ?
-                    <span>
+                    <span className="inline-tip">
                     *需国内运费 <a href="#according-8">[8]</a>
-                      {
-                        Number.isNaN(internationPrice) ? '' : <span> 总约：{japanPrice + internationPrice}元</span>
-                      }
                     </span> :
-                    (Number.isNaN(internationPrice) ? '' : <span> 总约：{japanPrice + internationPrice}元</span>)
+                    null
                 }
-                <p>计算公式： {method.remark}</p>
+                {
+                  (Number.isNaN(internationPrice) ? null : <span className="price total-price pull-right"> 总约：{japanPrice + internationPrice}元</span>)
+                }
               </span>
+              <p className="remark">计算公式： {method.remark}</p>
             </div>
           })
         }

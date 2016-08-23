@@ -30,12 +30,12 @@ var ShoppingSite = React.createClass({
     }
     japanPrice = Math.ceil(japanPrice);//对以日元计算的商品整体取整
     return <tr>
-        <td>{site.name}</td>
-        <td>
-          <p>{item.price ? item.price : 0}日元
+        <td className="site-name">{site.name}</td>
+        <td className="japan-price">
+          <div className="japan-price-wrapper">{item.price ? item.price : 0}日元
           { //日本国内运费
             japanShipmentPrice ?
-            ' + '+ item.japanShipment+'日元 ' : ''
+            ' + '+ item.japanShipment+'日元 ' : null
           }
           { //其他可能的手续费等费用
             Array.isArray(site.otherBuyFees) ?
@@ -73,13 +73,13 @@ var ShoppingSite = React.createClass({
               </span>
             }) : null
           }
-          => {japanPrice}元</p>
+          => <span className="price japan-price">{japanPrice} 元</span></div>
           <p>计算公式：{site.itemremark}</p>
         </td>
-        <td>
+        <td className="site-method">
           <ShippingMethods methods={site.methods} item={item} japanPrice={japanPrice} siteid={site.id} />
         </td>
-        <td>
+        <td className="site-according">
         { //根据
           site.accordings.map(function (according) {
             return <p key={according.key}><a href={according.value} target={according.newWindow ? '_blank': null}>{according.key}</a></p>

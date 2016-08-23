@@ -13,7 +13,8 @@ var ShoppingCartSite = React.createClass({//虽然是Site但以物流的方式�
         itemKind: current.itemKind,
       };
     });
-    item.weight += this.props.site.wrapperCalc(item.weight);
+    if(!this.props.site.methods[this.props.methodid].no_wrapper)
+      item.weight += this.props.site.wrapperCalc(item.weight);
     return item;
   },
   getTotalInterNational: function (method,items) {
@@ -45,18 +46,21 @@ var ShoppingCartSite = React.createClass({//虽然是Site但以物流的方式�
     var method = this.props.site.methods[methodid];
     var totalWeight = this.getTotalItem(this.props.cartItems).weight;
     var totalInterNational =  this.getTotalInterNational(method,this.props.cartItems);
-    return <ul>
-      <li>{this.props.site.name} - {method.name}</li>
+    return <ul className="shopping-one-cart">
+      <li className="title">
+        {this.props.site.name} - {method.name}
+        <span className="cart-right pull-right">购物车</span>
+      </li>
       {
         this.props.cartItems.map(function (item) {
           var cartItem = that.getRealItem(item);
-          return <li key={cartItem.id}>
-            <span>{cartItem.japanPrice}</span>
-            <span>{cartItem.weight}g</span>
+          return <li key={cartItem.id} className="cart-item">
+            <span className="japan-price">{cartItem.japanPrice} 元</span>
+            <span className="weight">{cartItem.weight}g</span>
           </li>
         })
       }
-      <li>
+      <li className="other-type-price">
       {//玛莎或者其他可能的扩展 直发拼团可自定义运费
         (method.otherType&&method.otherType!='hidden') ?
         <span><input type={method.otherType} name={method.id} onChange={this.handleOtherInput} />{method.otherUnit}</span> :
@@ -64,15 +68,15 @@ var ShoppingCartSite = React.createClass({//虽然是Site但以物流的方式�
       }
       {
         method.chinaMethod ?
-          <span>
-          此发送方式还需要支付国内运费，暂时无法将国内运费加入比较，请等待版本更新
+          <span className="inline-tip">
+          *需国内运费 <a href="#according-8">[8]</a>
           </span> : null
       }
       </li>
-      <li>
-        合计重量：{totalWeight+'g '}
-        每50g运费：{Math.round(totalInterNational/totalWeight*50*100)/100+'元 '}
-        合计运费：{totalInterNational+'元 '}
+      <li className="total-price">
+        合计重量：<label className="price">{totalWeight+'g '}</label>
+        每50g运费：<label className="price">{(Number.isNaN(Math.round(totalInterNational/totalWeight*50*100)/100) ? Math.round(totalInterNational/totalWeight*50*100)/100 +'元 ' : '超重啦！')}</label>
+        合计运费：<label className="price">{(Number.isNaN(totalInterNational) ? totalInterNational+'元' : '超重啦！')}</label>
       </li>
     </ul>;
   }

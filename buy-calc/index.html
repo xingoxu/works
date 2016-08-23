@@ -147,6 +147,7 @@
               return previous + that.price(current.weight,current.itemKind);
             },0);
           },
+          no_wrapper: true,
         },{
           id: 1,
           name: '萌购直发（EMS）',
@@ -262,7 +263,8 @@
           remark: '物品重量*直发拼团单价',
           chinaMethod: [{
 
-          }]
+          }],
+          no_wrapper: true,
         },{
           id: 1,
           name: '玛莎直发（EMS）',
@@ -702,8 +704,11 @@
       <div class="no-react upper">
         加载中...
       </div>
-      <div class="no-react lower">
+      <div class="no-react middle">
         如果长时间没有加载完成，可能是网络遇见了问题，请您刷新后再试【土下座
+      </div>
+      <div class="no-react lower">
+        【也有可能是你的浏览器太破没法运行javascript！哼！
       </div>
     </div>
     <script type="text/javascript" src="https://api.fixer.io/latest?base=JPY&symbols=CNY&callback=app.set_exchange"></script>
