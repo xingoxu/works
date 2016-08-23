@@ -4,9 +4,7 @@
     <meta charset="utf-8">
     <title>我怎么就是管不住这手呢？ - 日系剁手网站综合价格对比工具</title>
     <link rel="shortcut icon" href="favicon.ico?20160822" />
-    <script src="bower_components/react/react.min.js"></script>
-    <script src="bower_components/react/react-dom.min.js"></script>
-    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <link rel="stylesheet" href="dist/app.css" async >
     <script type="text/javascript">
     Number.parseInt = window.parseInt;
     Number.parseFloat = window.parseFloat;
@@ -687,10 +685,13 @@
         words: '汇率：银行卡汇率，各银行不同（即时购汇），使用信用卡支付时也有可能会被银行收取货币转换费，计算器使用的汇率为当前实时汇率，因此可能会比真实费用少，请向发卡行咨询更多信息。'
       },{
         id: 6,
-        words: 'fromJapan重量同2poi为实际重量，计算器所算得包裹重量与运费未计入包装。fromJapan存在会员等级折扣，由FJ点数支付的部分也免除5%系统使用费，暂时未提供计算。'
+        words: 'fromJapan计算重量为实际重量，计算器所算得包裹重量与运费未计入包装。fromJapan存在会员等级折扣，由FJ点数支付的部分也免除5%系统使用费，暂时未提供计算。'
       },{
         id: 7,
-        words: '计算重量为实际重量，包装重量约为30~100g。cdJapan的小型SAL与AIR与实际付款可能存在50日元+的误差，请以官方计算器为准。'
+        words: 'cdJapan计算重量为实际重量，包装重量约为30~100g。cdJapan的小型SAL与AIR与实际付款可能存在50日元+的误差，请以官方计算器为准。'
+      },{
+        id:8,
+        words: '此发送方式还需要支付国内运费，暂时无法将国内运费加入比较，请等待版本更新。',
       }],
       cart:[],
     };
@@ -698,9 +699,16 @@
   </head>
   <body>
     <div id="react-main">
-
+      <div class="no-react upper">
+        加载中...
+      </div>
+      <div class="no-react lower">
+        如果长时间没有加载完成，可能是网络遇见了问题，请您刷新后再试【土下座
+      </div>
     </div>
-    <script type="text/javascript" src="dist/app-template.js"></script>
     <script type="text/javascript" src="https://api.fixer.io/latest?base=JPY&symbols=CNY&callback=app.set_exchange"></script>
+    <script src="dist/react/react.min.js"></script>
+    <script src="dist/react/react-dom.min.js"></script>
+    <script type="text/javascript" src="dist/app.js"></script>
   </body>
 </html>
