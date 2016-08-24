@@ -102,7 +102,7 @@ var MainApp = React.createClass({
     // this.refs.shoppingCart.forceUpdate();//设置了state就不需要再forceUpdate了
 
     //滚到cart部分
-    $(window).scrollTop($('#shopping-cart').scrollTop());
+    $(window).scrollTop($('#shopping-cart').offset().top);
   },
   switchItemInput: function (event) {
     var isOpen = 'open';
