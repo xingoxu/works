@@ -14,14 +14,15 @@
   "author": "xingo",
   "license": "MIT",
   "devDependencies": {
+    "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "latest",
     "bower": "^1.7.9",
     "browser-sync": "^2.14.0",
     "gulp": "^3.9.1",
     "gulp-babel": "latest",
     "gulp-clean-css": "latest",
-    "gulp-less": "latest",
     "gulp-concat": "latest",
+    "gulp-less": "latest",
     "gulp-sourcemaps": "latest",
     "path": "latest"
   },

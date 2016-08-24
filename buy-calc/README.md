@@ -4,10 +4,8 @@
 
 Demo now available at http://works.xingoxu.com/buy-calc/
 
-Almost Done!
-
 ToDo:
-- 支持汇率手动修改
+- 使用日元结算优化
 - 手机端适配
 
 ## Start

@@ -10,7 +10,7 @@ gulp.task("react-compile",function () {
   return gulp.src(['src/react-template/*.jsx','src/app.jsx'])
     .pipe(sourcemaps.init())
     .pipe(babel({
-      presets: ['react'],
+      presets: ['react','es2015'],
       minified: true,
       comments: false
     }))
