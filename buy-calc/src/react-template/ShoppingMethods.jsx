@@ -9,6 +9,7 @@ var ShippingMethods = React.createClass({
 
     updateState[method_id] = event.target;
     this.setState(updateState);
+    event.stopPropagation();
   },
   render: function () {
     var item = this.props.item;

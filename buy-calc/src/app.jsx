@@ -55,14 +55,14 @@ var MainApp = React.createClass({
     }
   },
   setShip: function (event) {
-    if(event.target.name!='ship' && event.target.checked!=true)
+    if(event.target.name!='ship' || event.target.checked!=true)
       return;
     this.setState({
       shipid: event.target.value
     });
   },
   addToCart: function (event) {
-    var item = this.state;
+    var item = this.getItem();
     var shipid = item.shipid;
     var cart = this.props.app.cart;
     var id = cart.length ? (cart[cart.length-1].id+1) : 0;
@@ -75,8 +75,13 @@ var MainApp = React.createClass({
       shipid: shipid,
     });
     //清空输入
+    this.setState({
+      price: '',
+      weight: '',
+      japanShipment: ''
+    });
 
-    this.refs.shoppingCart.forceUpdate();
+    // this.refs.shoppingCart.forceUpdate();//设置了state就不需要再forceUpdate了
   },
   switchItemInput: function (event) {
     var isOpen = 'open';
@@ -149,7 +154,7 @@ var MainApp = React.createClass({
       </form>
       <div className="table-wrapper">
         <form action="javascript:;" onChange={this.setShip}>
-          <table>
+          <table cellspacing="0">
             <thead>
               <tr>
                 <td>商家</td>

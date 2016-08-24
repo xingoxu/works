@@ -4,6 +4,7 @@ Demo now available at http://works.xingoxu.com/buy-calc/
 Almost Done!
 
 ToDo:
+- 购物车删除
 - 加载界面的美化
 - 手机端适配
 
