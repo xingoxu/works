@@ -123,8 +123,37 @@ button, input, select, textarea {
   color: @grey-color;
   font-size: .9em;
 }
+//loading页面 start
+.no-react-wrapper{
+  height: 267px;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.no-react{
+  text-align: center;
+  &.upper{
+    font-size: 20px;
+    font-size: 2rem;
+    .loading-text{
+      margin: 20px 0;
+    }
+  }
+  &.middle {
+    font-size: 14px;
+    font-size: 1.4rem;
+  }
+  &.lower {
+    text-decoration: line-through;
+    color: @grey-color;
+  }
+}
+//loading页面 end
 
-
+//正页面部分start
 .top {
   padding: 15px;
   max-width: 1024px;
@@ -425,3 +454,4 @@ footer {
   font-size: 1.4rem;
   text-align: center;
 }
+//正页面部分end

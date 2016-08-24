@@ -9,7 +9,7 @@ var ShoppingCart = React.createClass({
       }));
     },[]);
     var that = this;
-    return <div className="cart-wrapper">
+    return <div className="cart-wrapper" id="shopping-cart">
     {
       methods.map(function (method) {
         var shipid = method.siteid+'-'+method.id;
