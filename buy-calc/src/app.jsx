@@ -131,6 +131,18 @@ var MainApp = React.createClass({
       sideSiteOpen: isOpen
     });
   },
+  toTop: function (event) {
+    window.scrollTo(null,0);
+  },
+  switchMobileSideBar: function (event) {
+    var isOpen = 'open';
+    if(this.state.mobileSideBar){
+      isOpen = false;
+    }
+    this.setState({
+      mobileSideBar: isOpen
+    });
+  },
   edit_exchange: function (event) {
     if(this.exchange_request)
       this.exchange_request.abort();
@@ -167,7 +179,7 @@ var MainApp = React.createClass({
         </div>
 
       </div>
-      <form className="app-right-inputs" action="javascript:;" onChange={this.calc}>
+      <form className={"app-right-inputs "+this.state.mobileSideBar} action="javascript:;" onChange={this.calc}>
         <section className={"item-inputs "+this.state.itemInputOpen}>
           <div className="switch" onClick={this.switchItemInput}></div>
           <h3>输入物品基本信息</h3>
@@ -224,6 +236,8 @@ var MainApp = React.createClass({
           </div>
         </section>
       </form>
+      <button id="menu" onClick={this.switchMobileSideBar}></button>
+      <button id="totop" onClick={this.toTop}></button>
       <div className="table-wrapper">
         <form action="javascript:;" onChange={this.setShip}>
           <table cellspacing="0">

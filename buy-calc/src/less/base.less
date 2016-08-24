@@ -157,6 +157,9 @@ button, input, select, textarea {
 //loading页面 end
 
 //正页面部分start
+.app-wrapper {
+  position: relative;
+}
 .top {
   padding: 15px;
   max-width: 1024px;
@@ -234,6 +237,10 @@ button, input, select, textarea {
       button {
         background-image: data-uri('../check.png');
       }
+      input[type=text]{
+        line-height: 14px;
+        line-height: 1.4rem;
+      }
     }
   }
   &:after {
@@ -267,7 +274,9 @@ button, input, select, textarea {
     margin-bottom: 10px;
 
     .transition(.3s all ease-in-out);
-
+    h3 {
+      margin-bottom: 15px;
+    }
     ul {
       list-style: none;
     }
@@ -346,13 +355,13 @@ button, input, select, textarea {
         }
       }
       &.item-inputs {
-        max-height: 205px;
+        max-height: 350px;
       }
       &.itemKind-inputs {
-        max-height: 205px; //如果物品种类增多 记得改这里
+        max-height: 350px; //如果物品种类增多 记得改这里
       }
       &.side-sites {
-        max-height: 215px; //如果商家增多 记得改这里
+        max-height: 360px; //如果商家增多 记得改这里
       }
     }
   }
