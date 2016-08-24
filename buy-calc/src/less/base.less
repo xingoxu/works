@@ -172,10 +172,64 @@ button, input, select, textarea {
       margin-left: 10px;
     }
   }
-  .exchange {
+  .center-exchange-wrapper {
     float: right;
+    padding: (105px-25px)/2;
     margin: 0 200px 0 0;
-    line-height: 105px;
+  }
+  .exchange-wrapper {
+    height: 25px;
+    line-height: 25px;
+    overflow-y: hidden;
+
+    .exchange {
+      p,button {
+        display: inline;
+        vertical-align: middle;
+        border: 0;
+      }
+      p {
+        position: relative;
+        top: 1px;
+      }
+      button {
+        margin-left: 10px;
+        width: 25px;
+        height: 25px;
+        padding: 0;
+        background-size: cover;
+        background-position: center;
+        background-color: transparent;
+      }
+      .edit {
+        background-image: data-uri('../edit.png');
+      }
+      .reload {
+        background-image: data-uri('../reload.png');
+        &.loading {
+          .keyframes(exchange-loading,{
+              from {
+                transform: rotate(0deg);
+              }
+              to {
+                transform: rotate(360deg);
+              }
+            });
+          .animation(exchange-loading 1s linear infinite);
+        }
+      }
+      .transition(.1s transform ease-in-out);
+    }
+    &.editing {
+      .exchange {
+        transform: translateY(-25px);
+      }
+    }
+    .editor {
+      button {
+        background-image: data-uri('../check.png');
+      }
+    }
   }
   &:after {
     content: '';

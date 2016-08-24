@@ -24,5 +24,8 @@
     "gulp-concat": "latest",
     "gulp-sourcemaps": "latest",
     "path": "latest"
+  },
+  "dependencies": {
+    "zepto": "^1.2.0"
   }
 }

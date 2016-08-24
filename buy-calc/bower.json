@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "react": "^15.3.1"
+    "react": "^15.3.1",
+    "zepto": "1.2.0"
   }
 }

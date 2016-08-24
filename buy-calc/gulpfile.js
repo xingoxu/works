@@ -19,7 +19,7 @@ gulp.task("react-compile",function () {
     .pipe(gulp.dest(destFolder));
 });
 gulp.task('copy-framework',function () {
-  return gulp.src('bower_components/**/*.min.js')
+  return gulp.src(['bower_components/**/*.min.js'])
     .pipe(gulp.dest(destFolder));
 });
 
@@ -38,7 +38,13 @@ gulp.task('less-compile',function () {
     .pipe(gulp.dest(destFolder));
 })
 
-gulp.task('compile',['react-compile','copy-framework','less-compile']);
+gulp.task('plain-js-compile',function () {
+  return gulp.src(['node_modules/zepto/dist/zepto.min.js','src/js/*.js'])
+  .pipe(concat('data.js'))
+  .pipe(gulp.dest(destFolder));
+})
+
+gulp.task('compile',['react-compile','copy-framework','plain-js-compile','less-compile']);
 
 //browser-sync
 var browserSync = require('browser-sync').create();

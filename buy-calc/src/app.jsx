@@ -24,8 +24,28 @@ var MainApp = React.createClass({
       japanShipment: '',
       itemKind: 99,
       itemInputOpen: 'open',
-      itemKindOpen: 'open'
+      itemKindOpen: 'open',
+      exchange_ajaxing: true,
+      exchange_editing: false,
     }
+  },
+  componentDidMount: function () {
+    //用ajax 载入汇率
+    //因为是jsonp，我们需要暴露一下自己
+    this.props.app.react_callback = function () {
+      if((!this.isMounted()) || this.state.exchange_editing)
+        return;
+      this.setState({
+        exchange_ajaxing: false,
+      });
+    }.bind(this);
+    this.reload_live_exchange();
+  },
+  reload_live_exchange: function () {
+    this.setState({
+      exchange_ajaxing: true
+    });
+    this.exchange_request = this.props.app.ajax_load_exchange();
   },
   calc: function (event) {
     var item = {};
@@ -80,6 +100,9 @@ var MainApp = React.createClass({
     });
 
     // this.refs.shoppingCart.forceUpdate();//设置了state就不需要再forceUpdate了
+
+    //滚到cart部分
+    $(window).scrollTop($('#shopping-cart').scrollTop());
   },
   switchItemInput: function (event) {
     var isOpen = 'open';
@@ -99,6 +122,19 @@ var MainApp = React.createClass({
       itemKindOpen: isOpen
     });
   },
+  edit_exchange: function (event) {
+    if(this.exchange_request)
+      this.exchange_request.abort();
+    this.setState({
+      exchange_editing: true,
+    });
+  },
+  change_exchange: function (event) {
+    this.props.app.exchange = Number.parseFloat(this.refs.exchangeInput.value) ? Number.parseFloat(this.refs.exchangeInput.value) : this.props.app.exchange ;
+    this.setState({
+      exchange_editing: false,
+    });
+  },
   render: function () {
     var item = this.getItem();
     return <div className="app-wrapper">
@@ -107,7 +143,20 @@ var MainApp = React.createClass({
           <img src="dist/title-pic.jpg"></img>
           <h1>日系剁手网站<br />综合价格对比工具</h1>
         </div>
-        <p className="exchange" >当前汇率：{this.props.app.exchange}</p>
+        <div className="center-exchange-wrapper pull-right">
+          <div className={"exchange-wrapper " + (this.state.exchange_editing ? 'editing' : '')}>
+            <div className="exchange">
+              <p>当前汇率：{this.props.app.exchange ? this.props.app.exchange : '需要手动更新汇率'}</p>
+              <button className="edit" onClick={this.edit_exchange} title="手动修改汇率"></button>
+              <button className={'reload '+(this.state.exchange_ajaxing ? 'loading' : '')} onClick={this.reload_live_exchange} disabled={this.state.exchange_ajaxing || this.state.exchange_editing} title="请求实时汇率"></button>
+            </div>
+            <div className="exchange editor">
+              <p>当前汇率：<input type="text" ref="exchangeInput" /></p>
+              <button onClick={this.change_exchange} title="确认"></button>
+            </div>
+          </div>
+        </div>
+
       </div>
       <form className="app-right-inputs" action="javascript:;" onChange={this.calc}>
         <section className={"item-inputs "+this.state.itemInputOpen}>
