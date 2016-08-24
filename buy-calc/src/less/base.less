@@ -106,7 +106,6 @@ button {
   user-select: none;
   background-image: none;
   border: 1px solid transparent;
-  border-radius: 4px;
 }
 button, input, select, textarea {
   font-family: inherit;
@@ -123,6 +122,8 @@ button, input, select, textarea {
   color: @grey-color;
   font-size: .9em;
 }
+// base end
+
 //loading页面 start
 .no-react-wrapper{
   height: 267px;
@@ -246,13 +247,23 @@ button, input, select, textarea {
     }
     &>div.switch{
       //switch
-      display: inline-block;
       width: 20px;
-      height: 20px;
       float: right;
-      background: data-uri('../plus.png') no-repeat center;
       cursor: pointer;
-      .transition(inherit);
+      position: relative;
+      top: -1px;
+      &:before {
+        content:'+';
+        display: block;
+        text-align: center;
+        font-size: 14px;
+        font-size: 1.4rem;
+        color: @teal-color;
+        font-weight: bold;
+
+
+        .transition(.3s all ease-in-out);
+      }
     }
     //开启样式
     &.open {
@@ -263,7 +274,9 @@ button, input, select, textarea {
         opacity: 1;
       }
       &>div.switch {
-        background: data-uri('../minus.png') no-repeat center;
+        &:before{
+          content: '-';
+        }
       }
     }
   }
@@ -431,7 +444,20 @@ button, input, select, textarea {
         width: 50%;
       }
       .weight{
-        widht: 50%;
+        // width: 50%;//不需要
+      }
+      .delete-item {
+        float: right;
+        border-radius: 50%;
+        padding: 0;
+        width: 21px;
+        height: 21px;
+        color: @white-color;
+        background: rgba(0,0,0,0.5);
+        .transition(.3s background ease-in-out);
+        &:hover {
+          background: rgba(0,0,0,0.8);
+        }
       }
     }
     .other-type-price{

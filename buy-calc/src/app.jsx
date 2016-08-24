@@ -65,10 +65,8 @@ var MainApp = React.createClass({
     var item = this.getItem();
     var shipid = item.shipid;
     var cart = this.props.app.cart;
-    var id = cart.length ? (cart[cart.length-1].id+1) : 0;
 
     this.props.app.cart.push({
-      id: id,
       japanPrice: realTimeStorage[shipid].japanPrice,
       weight: item.weight,
       itemKind: item.itemKind,

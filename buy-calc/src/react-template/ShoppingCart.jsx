@@ -1,5 +1,12 @@
 //购物车框架
 var ShoppingCart = React.createClass({
+  handleDeleteItem: function (index) {
+    var that = this;
+    return function (event) {
+      that.props.cart.splice(index,1);
+      that.forceUpdate();
+    }
+  },
   render: function () {
     var cart = this.props.cart;
     var methods = this.props.sites.reduce(function (previous,current) {
@@ -13,11 +20,12 @@ var ShoppingCart = React.createClass({
     {
       methods.map(function (method) {
         var shipid = method.siteid+'-'+method.id;
-        var cartItems = cart.reduce(function (previous,cartItem) {
+        var cartItems = cart.reduce(function (previous,cartItem, index) {
+          cartItem.id = index;
           return cartItem.shipid==shipid ? previous.concat(cartItem) : previous;
         },[]);
         if(cartItems.length <=0 ) return null;
-        return <ShoppingCartSite key={method.siteid+'-'+method.id} site={that.props.sites[method.siteid]} methodid={method.id} cartItems={cartItems}/>;
+        return <ShoppingCartSite key={method.siteid+'-'+method.id} site={that.props.sites[method.siteid]} methodid={method.id} cartItems={cartItems} handleDeleteItem={that.handleDeleteItem}/>;
       })
     }
     </div>

@@ -58,6 +58,7 @@ var ShoppingCartSite = React.createClass({//虽然是Site但以物流的方式�
           return <li key={cartItem.id} className="cart-item">
             <span className="japan-price">{cartItem.japanPrice} 元</span>
             <span className="weight">{cartItem.weight}g</span>
+            <button className="delete-item" title="删除此项" onClick={that.props.handleDeleteItem(cartItem.id)} >&times;</button>
           </li>
         })
       }
