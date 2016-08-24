@@ -34,6 +34,7 @@
 @teal-color: #2ea292;
 @teal-color-deep: #1f6d62;
 @teal-blue-color: #53606d;
+@little-blue-color: #f2faf8;
 @price-color: #c7254e;
 @grey-color: #ADA8A4;
 @button-disabled-background: #dddddd;
@@ -117,6 +118,7 @@ button, input, select, textarea {
 }
 .price {
   color: @price-color;
+  vertical-align: middle;
 }
 .inline-tip {
   color: @grey-color;
@@ -174,8 +176,9 @@ button, input, select, textarea {
   }
   .center-exchange-wrapper {
     float: right;
-    padding: (105px-25px)/2;
+    padding: (105px-25px)/2 0;
     margin: 0 200px 0 0;
+    text-align: right;
   }
   .exchange-wrapper {
     height: 25px;
@@ -252,7 +255,7 @@ button, input, select, textarea {
   p {
   }
   section {
-    background: @white-color;
+    background: @little-blue-color;
 
     padding: 15px;
     box-sizing: border-box;
@@ -286,6 +289,15 @@ button, input, select, textarea {
       position: absolute;
       top: 5px;
       left: -20px;
+    }
+
+    &.side-sites{
+      a {
+        display:block;
+      }
+      .inputs {
+        margin-top: 10px;
+      }
     }
 
     //关闭样式
@@ -323,7 +335,6 @@ button, input, select, textarea {
     }
     //开启样式
     &.open {
-      max-height: 50vh;
       opacity: 1;
       transform: none;
       .inputs{
@@ -333,6 +344,15 @@ button, input, select, textarea {
         &:before{
           content: '-';
         }
+      }
+      &.item-inputs {
+        max-height: 205px;
+      }
+      &.itemKind-inputs {
+        max-height: 205px; //如果物品种类增多 记得改这里
+      }
+      &.side-sites {
+        max-height: 215px; //如果商家增多 记得改这里
       }
     }
   }
@@ -405,6 +425,10 @@ button, input, select, textarea {
         td {
           text-align: center;
           border-bottom: 2px @teal-color solid;
+          padding: 0;
+          h3 {
+            display: none;
+          }
         }
         &:last-child {
           td {
@@ -464,6 +488,7 @@ button, input, select, textarea {
           padding: 10px 20px;
           font-size: 16px;
           font-size: 1.6rem;
+          text-align: left;
         }
       }
     }
@@ -506,6 +531,7 @@ button, input, select, textarea {
         float: right;
         border-radius: 50%;
         padding: 0;
+        border: 0;
         width: 21px;
         height: 21px;
         color: @white-color;
@@ -540,7 +566,7 @@ footer {
 
 //多说start
 #duoshuo-comment-system {
-  width: 1024px;
+  width: 1000px;
   margin: 50px auto 0;
   .system-title {
     font-size: 16px;
@@ -548,3 +574,5 @@ footer {
   }
 }
 //多说end
+
+@import 'mobile';

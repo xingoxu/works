@@ -1,0 +1,93 @@
+@media screen and (max-width: 1024px) {
+  .table-wrapper{
+    width: 100%;
+    margin: 0;
+    table {
+      border: 0;
+      thead {
+        display: none;
+      }
+      tr {
+        td {
+          float: left;
+          width: 100% !important;
+        }
+      }
+      tbody {
+        tr {
+          td {
+            font-size: 14px !important;
+            font-size: 1.4rem !important;
+            h3 {
+              display: block;
+              margin: 0;
+              padding: 8px 10px 10px;
+              background: @teal-color;
+              color: @white-color;
+              text-align: center;
+
+              font-size: 14px;
+              font-size: 1.4rem;
+              line-height: 16px;
+              line-height: 1.6rem;
+            }
+            p {
+              margin: 15px 0;
+            }
+            .japan-price-wrapper {
+              margin: 15px 0;
+            }
+          }
+          .site-name {
+            line-height: 40px;
+            line-height: 4rem;
+          }
+          .site-method {
+            .method-wrapper {
+              width: 100%;
+              box-sizing: border-box;
+              &:hover {
+                transform: none;
+                box-shadow: none;
+              }
+            }
+          }
+          .site-according {
+            padding: 0;
+            p {
+              margin: 15px;
+            }
+          }
+          &:after {
+            content: '看到这个说明药丸！';
+            display: table-cell;
+            float: left;
+            line-height: 50px;
+            visibility: hidden;
+          }
+          &:last-child{
+            td {
+              border-bottom: 2px @teal-color solid;
+            }
+          }
+        }
+      }
+    }
+  }
+  #duoshuo-comment-system {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 890px) {
+  .top {
+    .app-title {
+      img {
+        display: none;
+      }
+    }
+    .center-exchange-wrapper {
+      margin: 0;
+    }
+  }
+
+}

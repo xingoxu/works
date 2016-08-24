@@ -85,7 +85,7 @@ var ShoppingCartSite = React.createClass({//虽然是Site但以物流的方式�
         }
         {
           !Number.isNaN(totalInterNational) ?
-          <span>合计金额：<label className="price">{(totalItem.japanPrice+totalInterNational)+'元'}</label></span> :
+          <span>合计金额：<label className="price">{Math.round((totalItem.japanPrice+totalInterNational)*100)/100+'元'}</label></span> :
           null
         }
       </li>

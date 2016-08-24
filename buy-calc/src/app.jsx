@@ -19,7 +19,7 @@ function getRealItem(item) {
 var MainApp = React.createClass({
   getInitialState: function () {
     return {
-      price: '',
+      price: 0,
       weight: '',
       japanShipment: '',
       itemKind: 99,
@@ -94,7 +94,7 @@ var MainApp = React.createClass({
     });
     //清空输入
     this.setState({
-      price: '',
+      price: 0,
       weight: '',
       japanShipment: ''
     });
@@ -120,6 +120,15 @@ var MainApp = React.createClass({
     }
     this.setState({
       itemKindOpen: isOpen
+    });
+  },
+  switchSideSites: function (event) {
+    var isOpen = 'open';
+    if(this.state.sideSiteOpen){
+      isOpen = false;
+    }
+    this.setState({
+      sideSiteOpen: isOpen
     });
   },
   edit_exchange: function (event) {
@@ -197,7 +206,23 @@ var MainApp = React.createClass({
             </ul>
           </div>
         </section>
-        <section className="add-cart"><button onClick={this.addToCart} disabled={ !item.shipid||!item.price||!item.weight }>加入购物车</button></section>
+        <section className="select-ship">
+          <h3><span className="mobile-none">←</span> 选择商家的运送方法</h3>
+        </section>
+        <section className="add-cart">
+          <button onClick={this.addToCart} disabled={ !item.shipid || !item.weight }>加入购物车</button>
+        </section>
+        <section className={"side-sites "+this.state.sideSiteOpen}>
+          <div className="switch" onClick={this.switchSideSites}></div>
+          <h3>快速跳转商家</h3>
+          <div className="inputs">
+            {
+              this.props.app.shoppingSite.map(function (site) {
+                return <a href={'#'+site.name}>{site.name}</a>
+              })
+            }
+          </div>
+        </section>
       </form>
       <div className="table-wrapper">
         <form action="javascript:;" onChange={this.setShip}>

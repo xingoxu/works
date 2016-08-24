@@ -27,10 +27,10 @@ var less = require('gulp-less');
 var path = require('path');
 var cleanCSS = require('gulp-clean-css');
 gulp.task('less-compile',function () {
-  return gulp.src('src/less/**/*.less')
+  return gulp.src('src/less/*.less')
     .pipe(sourcemaps.init())
     .pipe(less({
-      paths: [path.join(__dirname,'less','includes')]
+      paths: [path.join(__dirname,'src','less','includes')]
     }))
     .pipe(concat('app.css'))
     .pipe(cleanCSS())

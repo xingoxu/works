@@ -5,7 +5,6 @@
 Demo now available at http://works.xingoxu.com/buy-calc/
 
 ToDo:
-- 使用日元结算优化
 - 手机端适配
 
 ## Start

@@ -50,7 +50,8 @@ var ShippingMethods = React.createClass({
                     null
                 }
                 {
-                  (Number.isNaN(internationPrice) ? null : <span className="price total-price pull-right"> 总约：{japanPrice + internationPrice}元</span>)
+                  (Number.isNaN(internationPrice) ? null :
+                  <span className="price total-price pull-right"> 总约：{Math.round((japanPrice + internationPrice)*100)/100}元</span>)
                 }
               </span>
               <p className="remark">计算公式： {method.remark}</p>
