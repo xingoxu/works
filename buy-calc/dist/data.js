@@ -211,10 +211,10 @@ var app={
     name: '玛莎多拉',
     itemremark: '(商品价格*8%(+日本国内运费)+ 手续费(+2%保价费))* 支付宝汇率[1]',
     itemprice: function (price) {
-      return Math.ceil(price*1.08*app.exchange*1.03);
+      return price*1.08*app.exchange*1.03;
     },
     japanShipmentPrice: function (shipment) {
-      return Math.ceil(shipment*app.exchange*1.03);
+      return shipment*app.exchange*1.03;
     },
     otherBuyFees: [{
       id: 0,
@@ -234,6 +234,9 @@ var app={
       },
       is_rmb: false,
     }],
+    finalPriceProc: function (price) {
+      return Math.ceil(price);
+    },
     //重量计算
     weightCalc: function (weight) {
       return Math.ceil(weight/50)*50;
@@ -398,7 +401,7 @@ var app={
         //设定单价
         var singlePrice = [60,85,110,135,160,185,210,235,260,285,310,335,360];
 
-        weight += app.shoppingSite[0].wrapperCalc(weight);//0 is 030buy's id
+        weight += app.shoppingSite[2].wrapperCalc(weight);
         return singlePrice[(Math.ceil((weight<=500 ? 501 : weight)/500)-2)];
       },
       remark: '萌购E特快价格'
@@ -431,10 +434,10 @@ var app={
     name: '2poi',
     itemremark: '(商品价格* 8%（+日本国内运费）)* 汇率*1.04（国际结算手续费）(+代购手续费 5%)',
     itemprice: function (price) {
-      return Math.ceil(price*1.08*app.exchange*1.04);
+      return price*1.08*app.exchange*1.04;
     },
     japanShipmentPrice: function (shipment) {
-      return Math.ceil(shipment*app.exchange*1.04);
+      return shipment*app.exchange*1.04;
     },
     otherBuyFees: [{
       id: 0,
@@ -459,7 +462,7 @@ var app={
       price: function (weight) {
         //包装计算
         weight += app.shoppingSite[3].wrapperCalc(weight);
-        return Math.round(app.generalPrices['EMS'](weight)*app.exchange*1.04*1000)/1000;//处理总体以日元结算的费用时，精确到小数点后3位
+        return app.generalPrices['EMS'](weight)*app.exchange*1.04;//处理总体以日元结算的费用时，精确到小数点后3位
       },
       remark: 'EMS价格*汇率*1.04（国际结算手续费）',
     },{
@@ -468,7 +471,7 @@ var app={
       price: function (weight) {
         //包装计算
         weight += app.shoppingSite[3].wrapperCalc(weight);
-        return Math.round(app.generalPrices['SAL'](weight)*1.1*app.exchange*1.04*1000)/1000;
+        return app.generalPrices['SAL'](weight)*1.1*app.exchange*1.04;
       },
       remark: 'SAL价格*1.1包装手续费*汇率*1.04（国际结算手续费）',
     },{
@@ -477,7 +480,7 @@ var app={
       price: function (weight) {
         //包装计算
         weight += app.shoppingSite[3].wrapperCalc(weight);
-        return Math.round(app.generalPrices['AIR'](weight)*1.1*app.exchange*1.04*1000)/1000;
+        return app.generalPrices['AIR'](weight)*1.1*app.exchange*1.04;
       },
       remark: 'AIR价格*1.1包装手续费*汇率*1.04（国际结算手续费）',
     },{
@@ -486,7 +489,7 @@ var app={
       price: function (weight) {
         //包装计算
         weight += app.shoppingSite[3].wrapperCalc(weight);
-        return Math.round((app.generalPrices['mSAL'](weight)+200)*app.exchange*1.04*1000)/1000;
+        return (app.generalPrices['mSAL'](weight)+200)*app.exchange*1.04;
       },
       remark: '（小型包裹SAL价格+200日元）*汇率*1.04（国际结算手续费）',
     },{
@@ -495,7 +498,7 @@ var app={
       price: function (weight) {
         //包装计算
         weight += app.shoppingSite[3].wrapperCalc(weight);
-        return Math.round((app.generalPrices['mAIR'](weight)+200)*app.exchange*1.04*1000)/1000;
+        return (app.generalPrices['mAIR'](weight)+200)*app.exchange*1.04;
       },
       remark: '（小型包裹AIR价格+200日元）*汇率*1.04（国际结算手续费）',
     }],
@@ -512,10 +515,10 @@ var app={
     name: 'fromJapan',
     itemremark: '（商品价格*8%（+日本国内运费）)*汇率[5]*1.05（系统使用费）',
     itemprice: function (price) {
-      return Math.round(price*1.08*app.exchange*1.05*1000)/1000;
+      return price*1.08*app.exchange*1.05;
     },
     japanShipmentPrice: function (shipment) {
-      return Math.round(shipment*app.exchange*1.05*1000)/1000;
+      return shipment*app.exchange*1.05;
     },
     otherBuyFees: [],
     //重量计算
@@ -531,8 +534,8 @@ var app={
       name: 'EMS',
       price: function (weight) {
         //包装计算
-        weight += app.shoppingSite[3].wrapperCalc(weight);
-        return Math.round(app.generalPrices['EMS'](weight)*app.exchange*1.05*1000)/1000;
+        weight += app.shoppingSite[4].wrapperCalc(weight);
+        return app.generalPrices['EMS'](weight)*app.exchange*1.05;
       },
       remark: 'EMS价格*1.05（系统使用费）',
     },{
@@ -540,8 +543,8 @@ var app={
       name: 'SAL',
       price: function (weight) {
         //包装计算
-        weight += app.shoppingSite[3].wrapperCalc(weight);
-        return Math.round(app.generalPrices['SAL'](weight)*app.exchange*1.05*1000)/1000;
+        weight += app.shoppingSite[4].wrapperCalc(weight);
+        return app.generalPrices['SAL'](weight)*app.exchange*1.05;
       },
       remark: 'SAL价格*1.05（系统使用费）',
     },{
@@ -549,8 +552,8 @@ var app={
       name: 'AIR',
       price: function (weight) {
         //包装计算
-        weight += app.shoppingSite[3].wrapperCalc(weight);
-        return Math.round(app.generalPrices['AIR'](weight)*app.exchange*1.05*1000)/1000;
+        weight += app.shoppingSite[4].wrapperCalc(weight);
+        return app.generalPrices['AIR'](weight)*app.exchange*1.05;
       },
       remark: 'AIR价格*1.05（系统使用费）',
     },{
@@ -558,13 +561,13 @@ var app={
       name: 'SAL小型包裹',
       price: function (weight) {
         //包装计算
-        weight += app.shoppingSite[3].wrapperCalc(weight);
-        return Math.round(app.generalPrices['mSAL'](weight)*app.exchange*1.05*1000)/1000;
+        weight += app.shoppingSite[4].wrapperCalc(weight);
+        return app.generalPrices['mSAL'](weight)*app.exchange*1.05;
       },
       otherType: 'checkbox',//410日元挂号服务
       other_input_calc: function (elem,item) {
         if(elem.checked)
-          return Math.round(410*app.exchange*1.05*1000)/1000;
+          return 410*app.exchange*1.05;
         return 0;
       },
       otherUnit: '410日元挂号服务',
@@ -574,13 +577,13 @@ var app={
       name: 'AIR小型包裹',
       price: function (weight) {
         //包装计算
-        weight += app.shoppingSite[3].wrapperCalc(weight);
-        return Math.round(app.generalPrices['mAIR'](weight)*app.exchange*1.05*1000)/1000;
+        weight += app.shoppingSite[4].wrapperCalc(weight);
+        return app.generalPrices['mAIR'](weight)*app.exchange*1.05;
       },
       otherType: 'checkbox',//410日元挂号服务
       other_input_calc: function (elem,item) {
         if(elem.checked)
-          return Math.round(410*app.exchange*1.05*1000)/1000;
+          return 410*app.exchange*1.05;
         return 0;
       },
       otherUnit: '410日元挂号服务',
@@ -599,10 +602,10 @@ var app={
     name: 'cdJapan',
     itemremark: '商品价格*汇率[5]',
     itemprice: function (price) {
-      return Math.round(price*app.exchange*1000)/1000;
+      return price*app.exchange;
     },
     japanShipmentPrice: function (shipment) {
-      return Math.round(shipment*app.exchange*1000)/1000;
+      return 0;
     },
     otherBuyFees: [],
     //重量计算
@@ -618,8 +621,8 @@ var app={
       name: 'EMS',
       price: function (weight) {
         //包装计算
-        weight += app.shoppingSite[3].wrapperCalc(weight);
-        return Math.round(app.generalPrices['EMS'](weight)*app.exchange*1000)/1000;
+        weight += app.shoppingSite[5].wrapperCalc(weight);
+        return app.generalPrices['EMS'](weight)*app.exchange;
       },
       remark: 'EMS价格',
     },{
@@ -627,13 +630,13 @@ var app={
       name: 'SAL小型包裹',
       price: function (weight) {
         //包装计算
-        weight += app.shoppingSite[3].wrapperCalc(weight);
-        return Math.round(app.generalPrices['mSAL'](weight)*app.exchange*1000)/1000;
+        weight += app.shoppingSite[5].wrapperCalc(weight);
+        return app.generalPrices['mSAL'](weight)*app.exchange;
       },
       otherType: 'checkbox',//410日元挂号服务
       other_input_calc: function (elem,item) {
         if(elem.checked)
-          return Math.round(410*app.exchange*1000)/1000;
+          return 410*app.exchange;
         return 0;
       },
       otherUnit: '410日元挂号服务',
@@ -643,13 +646,13 @@ var app={
       name: 'AIR小型包裹',
       price: function (weight) {
         //包装计算
-        weight += app.shoppingSite[3].wrapperCalc(weight);
-        return Math.round(app.generalPrices['mAIR'](weight)*app.exchange*1000)/1000;
+        weight += app.shoppingSite[5].wrapperCalc(weight);
+        return app.generalPrices['mAIR'](weight)*app.exchange;
       },
       otherType: 'checkbox',//410日元挂号服务
       other_input_calc: function (elem,item) {
         if(elem.checked)
-          return Math.round(410*app.exchange*1000)/1000;
+          return 410*app.exchange;
         return 0;
       },
       otherUnit: '410日元挂号服务',
@@ -691,7 +694,8 @@ var app={
     words: '此发送方式还需要支付国内运费，暂时无法将国内运费加入比较，请等待版本更新。',
   },{
     id: 9,
-    words: '除团发以外的直邮方法均有可能会被海关收税，请您参阅。'
+    words: '除团发以外的直邮方法均有可能会被海关收税，请您参阅链接的进境物品归类表。',
+    link: 'http://www.customs.gov.cn/Portals/0/hgzs_zfs/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E8%BF%9B%E5%A2%83%E7%89%A9%E5%93%81%E5%BD%92%E7%B1%BB%E8%A1%A8.doc'
   },{
     id:9,
     words: '此计算器数值仅供参考，并非代表真实价格，可能存在不可抗力的费用或是计算误差等。'

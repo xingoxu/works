@@ -28,8 +28,12 @@ var ShoppingSite = React.createClass({
       if(site.otherBuyFees[i].input_type=='hidden')
         japanPrice += site.otherBuyFees[i].input_calc(null,item);
     }
-    japanPrice = Math.ceil(japanPrice);//对以日元计算的商品整体取整
-    return <tr>
+    if (site.finalPriceProc) {
+      japanPrice = site.finalPriceProc(japanPrice);//对以日元结算的查看一下是否需要整体取整等操作
+    }
+
+    japanPrice = Math.round(japanPrice*100)/100;//对以日元结算的商品整体四舍五入
+    return <tr id={site.name}>
         <td className="site-name">{site.name}</td>
         <td className="japan-price">
           <div className="japan-price-wrapper">{item.price ? item.price : 0}日元

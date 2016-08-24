@@ -24,7 +24,8 @@ var ShippingMethods = React.createClass({
               internationPrice += method.other_input_calc(otherInputState[method.id],item);//基于输入
             if(method.other_price_base_calc)
               internationPrice += method.other_price_base_calc(internationPrice);//基于已付款
-            internationPrice = Math.ceil(internationPrice); //处理以日元结算的整体取整
+
+            internationPrice = Math.round(internationPrice*100)/100; //处理以日元结算的整体取整
 
             var radioValue = that.props.siteid+'-'+method.id;
             //设定各物流的日本方面价格
