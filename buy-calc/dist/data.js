@@ -208,7 +208,7 @@ var app={
     }]
   },{                                                                        // 030buy end masadora start
     id: 1,
-    name: '玛莎多拉',
+    name: '玛沙多拉',
     itemremark: '(商品价格*8%(+日本国内运费)+ 手续费(+2%保价费))* 支付宝汇率[1]',
     itemprice: function (price) {
       return price*1.08*app.exchange*1.03;
@@ -249,7 +249,7 @@ var app={
     },
     methods: [{
       id: 0,
-      name: '玛莎直发拼团',
+      name: '玛沙直发拼团',
       price: function (weight,itemKind) {
         return 0;
       },
@@ -265,7 +265,7 @@ var app={
       no_wrapper: true,
     },{
       id: 1,
-      name: '玛莎直发（EMS）',
+      name: '玛沙直发（EMS）',
       price: function (weight) {
         //包装计算
         weight += app.shoppingSite[1].wrapperCalc(weight);//1 is masadora's id
@@ -274,7 +274,7 @@ var app={
       remark: '日本邮政EMS价格*1.1包装手续费*支付宝汇率',
     },{
       id: 2,
-      name: '玛莎直发（SAL）',
+      name: '玛沙直发（SAL）',
       price: function (weight) {
         //包装计算
         weight += app.shoppingSite[1].wrapperCalc(weight);//1 is masadora's id
@@ -283,7 +283,7 @@ var app={
       remark: '日本邮政SAL价格*1.1包装手续费*支付宝汇率',
     },{
       id: 3,
-      name: '玛莎直发（AIR航空便）',
+      name: '玛沙直发（AIR航空便）',
       price: function (weight) {
         //包装计算
         weight += app.shoppingSite[1].wrapperCalc(weight);
@@ -292,7 +292,7 @@ var app={
       remark: '日本邮政AIR价格*1.1包装手续费*支付宝汇率',
     },{
       id: 4,
-      name: '玛莎直发（SAL小型包裹）',
+      name: '玛沙直发（SAL小型包裹）',
       price: function (weight) {
         //包装计算
         weight += app.shoppingSite[1].wrapperCalc(weight);
@@ -301,7 +301,7 @@ var app={
       remark: '日本邮政小型包裹SAL价格*1.1包装手续费*支付宝汇率',
     },{
       id: 5,
-      name: '玛莎直发（AIR小型包裹）',
+      name: '玛沙直发（AIR小型包裹）',
       price: function (weight) {
         //包装计算
         weight += app.shoppingSite[1].wrapperCalc(weight);
@@ -310,7 +310,7 @@ var app={
       remark: '日本邮政小型包裹AIR价格*1.1包装手续费*支付宝汇率',
     },{
       id: 6,
-      name: '玛莎直发（海运）',
+      name: '玛沙直发（海运）',
       price: function (weight) {
         //包装计算
         weight += app.shoppingSite[1].wrapperCalc(weight);
@@ -996,14 +996,14 @@ var app={
   }],                                                                       //shoppingSite end
   remarks: [{
     id: 1,
-    words: '支付宝汇率：萌购与玛莎使用支付宝平台转换日元并以日元结算，支付宝需要支付3%国际结算手续费，即汇率*1.03，由于本站汇率实时更新，可能会与支付宝汇率相差0.5%',
+    words: '支付宝汇率：萌购与玛沙使用支付宝平台转换日元并以日元结算，支付宝需要支付3%国际结算手续费，即汇率*1.03，由于本站汇率实时更新，可能会与支付宝汇率相差0.5%',
     link:'https://global.alipay.com/product/websitepayment.htm'
   },{
     id: 2,
-    words: '包装重量：萌购与玛莎与一些代购平台打包后会重新称重，并使用包装重量计算，此工具已计入包装重量'
+    words: '包装重量：萌购与玛沙与一些代购平台打包后会重新称重，并使用包装重量计算，此工具已计入包装重量'
   },{
     id: 3,
-    words: '玛莎多拉的包装计算方式为：少于1000g为200g，大于1000g为20%'
+    words: '玛沙多拉的包装计算方式为：少于1000g为200g，大于1000g为20%'
   },{
     id: 4,
     words: '2poi的虎穴无代购手续费与日本国内运费，其他网站代购手续费正实行免费，代购手续费一栏可以保持为0。'
