@@ -2,10 +2,7 @@
 
 唉，算账真是一个很头疼的问题呢。。。
 
-Live demo now available at http://works.xingoxu.com/buy-calc/
-
-ToDo:
-- 加入tenso转运
+Now available at http://works.xingoxu.com/buy-calc/
 
 ## Start
 

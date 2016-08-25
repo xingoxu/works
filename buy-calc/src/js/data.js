@@ -125,7 +125,7 @@ var app={
       name: '萌购团发',
       price: function (weight,itemKind) {
         //设定单价
-        var singlePrice = [3,2.5,3,3];
+        var singlePrice = [3,2.5,5,3];
         singlePrice[99] = 5;
 
         return Math.ceil(Math.ceil(weight/50)*singlePrice[itemKind]);
@@ -507,6 +507,9 @@ var app={
     },{
       key: '2poi备注',
       value: '#according-4'
+    },{
+      key: '2poi包裹使用实际称重 [9]',
+      value: '#according-9',
     }],
   },{                                                                                         //2poi end fromJapan start
     id: 4,
@@ -594,6 +597,9 @@ var app={
     },{
       key: 'fromJapan备注',
       value: '#according-6'
+    },{
+      key: 'fromJapan包裹使用实际称重 [9]',
+      value: '#according-9',
     }],
   },{                                                                                         //fromJapan end cdJapan start
     id: 5,
@@ -663,6 +669,327 @@ var app={
     },{
       key: 'cdJapan备注',
       value: '#according-7'
+    },{
+      key: 'cdJapan包裹使用实际称重 [9]',
+      value: '#according-9',
+    }],
+  },{                                                                                         //cdJapan end and tenso Start
+    id: 6,
+    name: 'tenso转运',
+    itemremark: '（商品价格*8%（+日本国内运费）)*汇率[5]',
+    itemprice: function (price) {
+      return price*1.08*app.exchange;
+    },
+    japanShipmentPrice: function (shipment) {
+      return shipment*app.exchange;
+    },
+    otherBuyFees: [],
+    //重量计算
+    weightCalc: function (weight) {
+      return weight;
+    },
+    //包装计算器
+    wrapperCalc: function (weight) {
+      return 0;
+    },
+    methods: [{
+      id: 0,
+      name: 'EMS',
+      price: function (weight) {
+        function tensoEMS(weight) {
+          if (weight<=1000) {
+            var singlePrice = [1450,1500,1550,1700,1750,1800,1900,1910,1920,1930,2080,2090,2240,2250,2400,2410,2560,2560,2700,2700]//定义单价
+            return singlePrice[Math.ceil((weight!=0 ? weight : 1)/50)-1];
+          }
+          if(weight<=1100)
+            return 3100;
+          if(weight<=1200)
+            return 3180;
+          if(weight<=1250)
+            return 3190;
+          if(weight<=1300)
+            return 3500;
+          if(weight<=1500)
+            return 3600;
+          if(weight<=1600)
+            return 3940;
+          if(weight<=1700)
+            return 3960;
+          if(weight<=1750)
+            return 3970;
+          if(weight<=1800)
+            return 4280;
+          if(weight<=1900)
+            return 4300;
+          if(weight<=10000){
+            var singlePrice = [4320,4950,5620,6230,6830,7430,8120,8820,9500,10470,10650,11730,11800,12780,12950,13930,14100]
+            return singlePrice[Math.ceil(weight/500)-4];
+          }
+          var singlePrice = [15250,16400,17550,18700,19500,20300,21100,21900,22700,23500,24300,25100,25900,26700,27500,28300,29100,29900,30700,31500];
+          return singlePrice[Math.ceil(weight/1000)-11];
+        }
+
+        //包装计算
+        weight += app.shoppingSite[6].wrapperCalc(weight);
+        return tensoEMS(weight)*app.exchange;
+      },
+      remark: 'EMS价格+tenso手续费',
+      total: function (items) {//集中包装需要手续费
+        var itemLength = items.length;
+        var totalWeight = items.reduce(function (previous,current) {
+          return previous+current.weight;
+        },0);
+        return (this.price(totalWeight)+itemLength*300+200)*app.exchange;
+      },
+    },{
+      id: 1,
+      name: 'SAL',
+      price: function (weight) {
+        function tensoSAL(weight) {
+          if (weight<=1000) {
+            var singlePrice = [1850,1900,1950,2100,2150,2200,2300,2310,2320,2330,2340,2350,2360,2370,2380,2390,2400,2400,2400,2400]//定义单价
+            return singlePrice[Math.ceil((weight!=0 ? weight : 1)/50)-1];
+          }
+          if(weight<=1100)
+            return 3100;
+          if(weight<=1200)
+            return 3180;
+          if(weight<=1250)
+            return 3190;
+          if(weight<=1300)
+            return 3200;
+          if(weight<=1500)
+            return 3300;
+          if(weight<=1600)
+            return 3340;
+          if(weight<=1700)
+            return 3360;
+          if(weight<=1750)
+            return 3370;
+          if(weight<=1800)
+            return 3380;
+          if(weight<=1900)
+            return 3400;
+          if(weight<=10000){
+            var singlePrice = [3420,4150,4320,5030,5130,5830,6020,6720,6900,7570,7750,8530,8600,9280,9450,10130,10300]
+            return singlePrice[Math.ceil(weight/500)-4];
+          }
+          var singlePrice = [10950,11600,12250,12900,13200,13500,13800,14100,14400,14700,15000,15300,15600,15900,16200,16500,16800,17100,17400,17700];
+          return singlePrice[Math.ceil(weight/1000)-11];
+        }
+
+        //包装计算
+        weight += app.shoppingSite[6].wrapperCalc(weight);
+        return tensoSAL(weight)*app.exchange;
+      },
+      remark: 'SAL价格+tenso手续费',
+      total: function (items) {//集中包装需要手续费
+        var itemLength = items.length;
+        var totalWeight = items.reduce(function (previous,current) {
+          return previous+current.weight;
+        },0);
+        return (this.price(totalWeight)+itemLength*300+200)*app.exchange;
+      },
+    },{
+      id: 2,
+      name: 'AIR',
+      price: function (weight) {
+        function tensoAIR(weight) {
+          if (weight<=1000) {
+            var singlePrice = [1750,1800,1850,2000,2050,2100,2200,2210,2220,2230,2590,2600,2610,2620,2630,2640,2650,2650,2650,2650]//定义单价
+            return singlePrice[Math.ceil((weight!=0 ? weight : 1)/50)-1];
+          }
+          if(weight<=1100)
+            return 3100;
+          if(weight<=1200)
+            return 3180;
+          if(weight<=1250)
+            return 3190;
+          if(weight<=1300)
+            return 3200;
+          if(weight<=1500)
+            return 3300;
+          if(weight<=1600)
+            return 3690;
+          if(weight<=1700)
+            return 3710;
+          if(weight<=1750)
+            return 3720;
+          if(weight<=1800)
+            return 3730;
+          if(weight<=1900)
+            return 3750;
+          if(weight<=10000){
+            var singlePrice = [3770,4250,4770,5230,5680,6130,6670,7170,7650,8120,8600,9180,9550,10030,10050,10980,11450]
+            return singlePrice[Math.ceil(weight/500)-4];
+          }
+          var singlePrice = [12200,12950,13700,14450,14850,15250,15650,16050,16450,16850,17250,17650,18050,18450,18850,19250,19650,20050,20450,20850];
+          return singlePrice[Math.ceil(weight/1000)-11];
+        }
+
+        //包装计算
+        weight += app.shoppingSite[6].wrapperCalc(weight);
+        return tensoAIR(weight)*app.exchange;
+      },
+      remark: 'AIR价格+tenso手续费',
+      total: function (items) {//集中包装需要手续费
+        var itemLength = items.length;
+        var totalWeight = items.reduce(function (previous,current) {
+          return previous+current.weight;
+        },0);
+        return (this.price(totalWeight)+itemLength*300+200)*app.exchange;
+      },
+    },{
+      id: 3,
+      name: '船运',
+      price: function (weight) {
+        function tensoShip(weight) {
+          if (weight<=1000) {
+            var singlePrice = [1650,1700,1750,1900,1950,2000,2100,2110,2120,2130,2140,2150,2160,2170,2180,2190,2200,2200,2200,2200]//定义单价
+            return singlePrice[Math.ceil((weight!=0 ? weight : 1)/50)-1];
+          }
+          if(weight<=1100)
+            return 2600;
+          if(weight<=1200)
+            return 2680;
+          if(weight<=1250)
+            return 2690;
+          if(weight<=1300)
+            return 2700;
+          if(weight<=1500)
+            return 2800;
+          if(weight<=1600)
+            return 2840;
+          if(weight<=1700)
+            return 2860;
+          if(weight<=1750)
+            return 2870;
+          if(weight<=1800)
+            return 2880;
+          if(weight<=1900)
+            return 2900;
+          if(weight<=10000){
+            var singlePrice = [2920,3350,3520,3930,4030,4430,4620,5120,5300,5770,5950,6530,6600,7080,7250,7730,7900]
+            return singlePrice[Math.ceil(weight/500)-4];
+          }
+          var singlePrice = [8500,9100,9700,10300,10550,10800,11050,11300,11550,11800,12050,12300,12550,12800,13050,13300,13550,13800,14050,14300];
+          return singlePrice[Math.ceil(weight/1000)-11];
+        }
+
+        //包装计算
+        weight += app.shoppingSite[6].wrapperCalc(weight);
+        return tensoShip(weight)*app.exchange;
+      },
+      remark: '船运价格+tenso手续费',
+      total: function (items) {//集中包装需要手续费
+        var itemLength = items.length;
+        var totalWeight = items.reduce(function (previous,current) {
+          return previous+current.weight;
+        },0);
+        return (this.price(totalWeight)+itemLength*300+200)*app.exchange;
+      },
+    },{
+      id: 4,
+      name: 'SAL小型包裹带挂号',
+      price: function (weight) {
+        function tenso_mSAL(weight) {
+          if (weight<=1000) {
+            var singlePrice = [620,670,800,950,1080,1130,1310,1320,1410,1420,1510,1520,1610,1620,1710,1720,1810,1810,1890,1890]//定义单价
+            return singlePrice[Math.ceil((weight!=0 ? weight : 1)/50)-1];
+          }
+          if(weight<=1100)
+            return 2070;
+          if(weight<=1200)
+            return 2230;
+          if(weight<=1250)
+            return 2320;
+          if(weight<=1300)
+            return 2330;
+          if(weight<=1400)
+            return 2510;
+          if(weight<=1500)
+            return 2590;
+          if(weight<=1600)
+            return 2710;
+          if(weight<=1700)
+            return 2810;
+          if(weight<=1750)
+            return 2900;
+          if(weight<=1800)
+            return 2910;
+          if(weight<=1900)
+            return 3010;
+          if(weight<=2000){
+            return 3110;
+          }
+        }
+
+        //包装计算
+        weight += app.shoppingSite[6].wrapperCalc(weight);
+        return tenso_mSAL(weight)*app.exchange*1.05;
+      },
+      remark: '小型包裹SAL挂号价格+tenso手续费',
+      total: function (items) {//集中包装需要手续费
+        var itemLength = items.length;
+        var totalWeight = items.reduce(function (previous,current) {
+          return previous+current.weight;
+        },0);
+        return (this.price(totalWeight)+itemLength*300+200)*app.exchange;
+      },
+    },{
+      id: 5,
+      name: 'AIR小型包裹带挂号',
+      price: function (weight) {
+        function tenso_mAIR(weight) {
+          if (weight<=1000) {
+            var singlePrice = [580,700,820,1040,1160,1280,1450,1530,1610,1690,1770,1850,1930,2010,2090,2170,2250,2320,2390,2460]//定义单价
+            return singlePrice[Math.ceil((weight!=0 ? weight : 1)/50)-1];
+          }
+          if(weight<=1100)
+            return 2735;
+          if(weight<=1200)
+            return 2815;
+          if(weight<=1250)
+            return 2825;
+          if(weight<=1300)
+            return 3010;
+          if(weight<=1500)
+            return 3110;
+          if(weight<=1600)
+            return 3325;
+          if(weight<=1700)
+            return 3345;
+          if(weight<=1750)
+            return 3355;
+          if(weight<=1800)
+            return 3540;
+          if(weight<=1900)
+            return 3560;
+          if(weight<=2000){
+            return 3580;
+          }
+        }
+
+        //包装计算
+        weight += app.shoppingSite[6].wrapperCalc(weight);
+        return tenso_mAIR(weight)*app.exchange*1.05;
+      },
+      remark: '小型包裹AIR挂号价格+tenso手续费',
+      total: function (items) {//集中包装需要手续费
+        var itemLength = items.length;
+        var totalWeight = items.reduce(function (previous,current) {
+          return previous+current.weight;
+        },0);
+        return (this.price(totalWeight)+itemLength*300+200)*app.exchange;
+      },
+    }],
+    accordings: [{
+      key: 'tenso转运服务费',
+      value: 'http://www.tenso.com/chs/static/guide_fee_index#tabNavi_detail_region_1',
+      newWindow: true
+    },{
+      key: 'tenso包裹使用实际称重 [9]',
+      value: '#according-9',
     }],
   }],                                                                       //shoppingSite end
   remarks: [{
@@ -677,25 +1004,28 @@ var app={
     words: '玛莎多拉的包装计算方式为：少于1000g为200g，大于1000g为20%'
   },{
     id: 4,
-    words: '2poi的虎穴无代购手续费与日本国内运费，其他网站代购手续费正实行免费，代购手续费一栏可以保持为0。2poi的重量计算为实际重量计算，因此，包裹的重量为实际重量，实际的2poi国际运费会比计算器中的费用略大，请知悉。'
+    words: '2poi的虎穴无代购手续费与日本国内运费，其他网站代购手续费正实行免费，代购手续费一栏可以保持为0。'
   },{
-    id:5,
+    id: 5,
     words: '汇率：银行卡汇率，各银行不同（即时购汇），使用信用卡支付时也有可能会被银行收取货币转换费，计算器使用的汇率为当前实时汇率，因此可能会比真实费用少，请向发卡行咨询更多信息。'
   },{
     id: 6,
-    words: 'fromJapan计算重量为实际重量，计算器所算得包裹重量与运费未计入包装。fromJapan存在会员等级折扣，由FJ点数支付的部分也免除5%系统使用费，暂时未提供计算。'
+    words: 'fromJapan存在会员等级折扣，由FJ点数支付的部分也免除5%系统使用费，暂时未提供计算。'
   },{
     id: 7,
-    words: 'cdJapan计算重量为实际重量，包装重量约为30~100g。cdJapan的小型SAL与AIR与实际付款可能存在50日元+的误差，请以官方计算器为准。'
+    words: 'cdJapan的小型SAL与AIR与实际付款可能存在50日元+的误差，请以官方计算器为准。'
   },{
-    id:8,
+    id: 8,
     words: '此发送方式还需要支付国内运费，暂时无法将国内运费加入比较，请等待版本更新。',
   },{
     id: 9,
+    words: '实际称重：计算重量为实际重量，计算器所算得包裹重量与运费未计入包装，包装重量一般约为30~100g，实际国际运费会比计算器中的费用略大，请注意。'
+  },{
+    id: 10,
     words: '除团发以外的直邮方法均有可能会被海关收税，请您参阅链接的进境物品归类表。',
     link: 'http://www.customs.gov.cn/Portals/0/hgzs_zfs/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E8%BF%9B%E5%A2%83%E7%89%A9%E5%93%81%E5%BD%92%E7%B1%BB%E8%A1%A8.doc'
   },{
-    id:9,
+    id: 11,
     words: '此计算器数值仅供参考，并非代表真实价格，可能存在不可抗力的费用或是计算误差等。'
   }],
   cart:[],
