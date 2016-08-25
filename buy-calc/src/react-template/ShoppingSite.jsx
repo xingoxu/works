@@ -33,12 +33,12 @@ var ShoppingSite = React.createClass({
     }
 
     japanPrice = Math.round(japanPrice*100)/100;//对以日元结算的商品整体四舍五入
-    return <tr id={site.name}>
-        <td className="site-name">
+    return <li id={site.name}>
+        <div className="site-name">
           <h3>商家</h3>
           {site.name}
-        </td>
-        <td className="japan-price">
+        </div>
+        <div className="japan-price">
           <h3>商品价格</h3>
           <div className="japan-price-wrapper">{item.price ? item.price : 0}日元
           { //日本国内运费
@@ -83,19 +83,19 @@ var ShoppingSite = React.createClass({
           }
           => <span className="price japan-price">{japanPrice} 元</span></div>
           <p>计算公式：{site.itemremark}</p>
-        </td>
-        <td className="site-method">
+        </div>
+        <div className="site-method">
           <h3>运送方法</h3>
           <ShippingMethods methods={site.methods} item={item} japanPrice={japanPrice} siteid={site.id} />
-        </td>
-        <td className="site-according">
+        </div>
+        <div className="site-according">
           <h3>根据</h3>
           { //根据
             site.accordings.map(function (according) {
               return <p key={according.key}><a href={according.value} target={according.newWindow ? '_blank': null}>{according.key}</a></p>
             })
           }
-        </td>
-      </tr>
+        </div>
+      </li>
   }
 });

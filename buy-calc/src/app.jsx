@@ -240,25 +240,15 @@ var MainApp = React.createClass({
       <button id="totop" onClick={this.toTop}></button>
       <div className="table-wrapper">
         <form action="javascript:;" onChange={this.setShip}>
-          <table cellspacing="0">
-            <thead>
-              <tr>
-                <td>商家</td>
-                <td>商品价格</td>
-                <td>运送方法</td>
-                <td>根据</td>
-              </tr>
-            </thead>
-            <tbody>
-            {
-              this.props.app.shoppingSite.map(function (site) {
-                return <ShoppingSite key={site.id}
-                                     site={site}
-                                     item={item} />
-              })
-            }
-            </tbody>
-          </table>
+          <ul>
+          {
+            this.props.app.shoppingSite.map(function (site) {
+              return <ShoppingSite key={site.id}
+                                   site={site}
+                                   item={item} />
+            })
+          }
+          </ul>
         </form>
       </div>
 
