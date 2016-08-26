@@ -228,7 +228,9 @@ var app={
       default_value: false,
       input_type: 'checkbox',
       input_calc: function (elem,item) {
-        return elem.checked ? Math.ceil(item.price*0.02)*app.exchange*1.03 : 0;
+        if(!elem.checked)
+          return 0;
+        return item.price*0.02>=20 ? Math.ceil(item.price*0.02)*app.exchange*1.03 : 20*app.exchange*1.03;
       },
       is_rmb: false,
     }],
