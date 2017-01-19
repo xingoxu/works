@@ -1,0 +1,3 @@
+[submodule "buy-calc"]
+   path = buy-calc
+   url = https://github.com/xingoxu/buy-calc
