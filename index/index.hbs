@@ -9,16 +9,16 @@
 	<meta name="handheldfriendly" content="true">
 	<meta name="theme-color" content="#325899">
 
-	<title>作品 | xingo&#39;s private plot</title>
+	<title>{{ htmlWebpackPlugin.options.indexContent.title }} | xingo&#39;s private plot</title>
 	<meta name="description" content="React.js 日系直邮代购转运费用对比 HTML/CSS/JS Paper-White C#.Net PixInTouch">
 	<meta property="og:type" content="website">
-	<meta property="og:title" content="作品">
+	<meta property="og:title" content="{{ htmlWebpackPlugin.options.indexContent.title }}">
 	<meta property="og:url" content="https://works.xingoxu.com/">
 	<meta property="og:site_name" content="xingo's private plot">
 	<meta property="og:description" content="React.js 日系直邮代购转运费用对比 HTML/CSS/JS Paper-White C#.Net PixInTouch">
 	<meta property="og:updated_time" content="2017-01-19T03:29:43.393Z">
 	<meta name="twitter:card" content="summary">
-	<meta name="twitter:title" content="作品">
+	<meta name="twitter:title" content="{{ htmlWebpackPlugin.options.indexContent.title }}">
 	<meta name="twitter:description" content="React.js 日系直邮代购转运费用对比 HTML/CSS/JS Paper-White C#.Net PixInTouch">
 	<meta name="twitter:creator" content="@xingoxu">
 	<link rel="icon" href="https://blog.xingoxu.com/favicon.ico">
@@ -90,26 +90,14 @@
 						<input type="hidden" class="isFancy" />
 						<header class="article-header">
 							<h1 class="article-title" itemprop="name">
-								作品
+								{{ htmlWebpackPlugin.options.indexContent.title }}
 							</h1>
 						</header>
 						<div class="article-info article-info-post">
 							<div class="clearfix"></div>
 						</div>
 						<div class="article-entry" itemprop="articleBody">
-							<h1 id="react-js">React.js</h1>
-<ul>
-<li><a href="http://works.xingoxu.com/buy-calc/">日系直邮代购转运费用对比</a></li>
-</ul>
-<h1 id="html-css-js">HTML/CSS/JS</h1>
-<ul>
-<li><a href="https://blog.xingoxu.com/2016/03/hexo-theme-paper-white/">Paper-White</a></li>
-</ul>
-<h1 id="c-net">C#.Net</h1>
-<ul>
-<li><a href="https://blog.xingoxu.com/2015/12/PixInTouch/">PixInTouch</a></li>
-</ul>
-
+							{{{ htmlWebpackPlugin.options.indexContent.articleEntry }}}
 						</div>
 					</div>
 
@@ -272,27 +260,8 @@
 									<form class="search-box" action="https://www.google.com/search" method="get" target="_blank" accept-charset="utf-8">
 										<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="">
 										<label class="search-icon" for="search">
-											<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-											  xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-											  xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="1500" height="350" viewBox="0 0 1500 350" id="searchAnimatorSVG"
-											  version="1.1" inkscape:version="0.91 r13725" sodipodi:docname="search-icon.svg" preserveAspectRatio="xMinYMid meet">
-											  <defs id="defs4" />
-											  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2"
-											    inkscape:zoom="1.4" inkscape:cx="287.96719" inkscape:cy="238.13903" inkscape:document-units="px" inkscape:current-layer="searchAnimatorSVG"
-											    showgrid="false" units="px" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" inkscape:window-width="2560"
-											    inkscape:window-height="1377" inkscape:window-x="-8" inkscape:window-y="196" inkscape:window-maximized="1" />
-											  <path style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" d="M 315,315 187,202 a 105,105 0 1 1 15,-15" id="magnifier" inkscape:connector-curvature="0" />
-											  <path inkscape:connector-curvature="0" id="underline" d="m 315,315 1700,0" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
-											  <metadata id="metadata4154">
-											    <rdf:RDF>
-											      <cc:Work rdf:about="">
-											        <dc:title></dc:title>
-											        <dc:format>image/svg+xml</dc:format>
-											        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-											      </cc:Work>
-											    </rdf:RDF>
-											  </metadata>
-											</svg>											<input type="hidden" class="hide" name="q" value="site:blog.xingoxu.com">
+											{{> searchsvg}}
+											<input type="hidden" class="hide" name="q" value="site:blog.xingoxu.com">
 										</label>
 									</form>
 								</li>
@@ -444,6 +413,6 @@
 </script>
 
 
-<script type="text/javascript" src="js/app.js"></script></body>
+</body>
 
 </html>

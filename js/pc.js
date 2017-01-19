@@ -35,18 +35,6 @@ define([], function() {
 		};
 	})();
 
-	var resetTags = function() {
-		var tags = $(".tagcloud a");
-		tags.css({
-			"font-size": "12px"
-		});
-		for (var i = 0, len = tags.length; i < len; i++) {
-			var num = tags.eq(i).html().length % 5 + 1;
-			tags[i].className = "";
-			tags.eq(i).addClass("color" + num);
-		}
-	};
-
 	//bind & slide use this index
 	var index = 0;
 
@@ -85,22 +73,6 @@ define([], function() {
 				Tips.hide();
 			}, timeout);
 		});
-
-
-		/*$(".icon").bind("mouseenter", function() {
-			isEnterBtn = true;
-			Tips.show();
-		}).bind("mouseleave", function() {
-			isEnterBtn = false;
-			setTimeout(function() {
-				if (!isEnterTips) {
-					Tips.hide();
-				}
-			}, 100);
-		});*/
-
-
-
 	};
 
 	var setColumn = function() {
@@ -113,7 +85,6 @@ define([], function() {
 
 	return {
 		init: function() {
-			/*resetTags();*/
 			bind();
 			setColumn();
 			Tips.init();

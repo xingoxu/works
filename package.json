@@ -1,0 +1,19 @@
+{
+  "name": "work-index",
+  "version": "0.0.1",
+  "main": "index/build.js",
+  "repository": "https://github.com/xingoxu/works.git",
+  "author": "xingoxu <xingoxu@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "handlebars-loader": "^1.4.0",
+    "html-webpack-plugin": "^2.26.0",
+    "ora": "^1.0.0",
+    "webpack": "2.2.0"
+  },
+  "dependencies": {
+    "handlebars": "^4.0.6",
+    "jquery": "^3.1.1",
+    "meta-marked": "^0.4.2"
+  }
+}
