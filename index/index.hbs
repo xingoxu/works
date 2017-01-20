@@ -81,7 +81,7 @@
         <article id="page-my-works" class="article article-type-page article-page" itemscope itemprop="blogPost">
           <div class="article-meta">
             <a href="/" class="article-date">
-              <time datetime="2015-12-21T05:39:01.000Z" itemprop="datePublished">2015-12-21</time>
+							<time datetime="{{toISOString htmlWebpackPlugin.options.indexContent.date}}" itemprop="datePublished">{{formatDate htmlWebpackPlugin.options.indexContent.date }}</time>
             </a>
           </div>
           <div class="article-inner">
@@ -216,13 +216,6 @@
                     <li><a href="https://blog.xingoxu.com/about">关于我</a></li>
                     <li><a href="/">作品</a></li>
                     <li>
-                      <div>
-                        <label for="ajax-switch" class="ajax-checkbox">
-                          <input class="access-hide" disabled id="ajax-switch" name="auto-load" type="checkbox" />开启首页自加载<span class="switch-toggle"></span>
-                        </label>
-                      </div>
-                    </li>
-                    <li>
                       <form class="search-box" action="https://www.google.com/search" method="get" target="_blank" accept-charset="utf-8">
                         <input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="">
                         <label class="search-icon" for="search">
@@ -266,13 +259,6 @@
           <div class="viewer-div friends" id="js-mobile-friends">
             <li><a target="_blank" class="main-navlink switch-friends-link" href="https://blog.smdcn.net/">SmdCn&#39;s Blog</a></li>
             <li><a target="_blank" class="main-navlink switch-friends-link" href="http://blog.d0zingcat.xyz/">Carpe Diem</a></li>
-          </div>
-        </div>
-        <div class="viewer-box-wrap">
-          <div class="viewer-title">
-            <label for="ajax-switch-mobile" class="ajax-checkbox">
-              <input class="access-hide" disabled id="ajax-switch-mobile" name="auto-load" type="checkbox" />开启首页自加载<span class="switch-toggle"></span>
-            </label>
           </div>
         </div>
       </div>
@@ -345,7 +331,7 @@
       }       
     });
   </script>
-  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   </script>
 </body>
 
