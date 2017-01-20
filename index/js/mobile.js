@@ -5,7 +5,7 @@
  * @update add effects to mobile-sidebar & more moudler
  * 
  */
-define([], function() {
+define(['jquery'], function($) {
 
 	var $menu = $('.slider-trigger'),
 		$viewer = $('#viewer'),

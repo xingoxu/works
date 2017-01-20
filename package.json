@@ -6,14 +6,20 @@
   "author": "xingoxu <xingoxu@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "beta",
     "handlebars-loader": "^1.4.0",
     "html-webpack-plugin": "^2.26.0",
+    "imports-loader": "^0.7.0",
     "ora": "^1.0.0",
+    "url-loader": "^0.5.7",
     "webpack": "2.2.0"
   },
   "dependencies": {
     "handlebars": "^4.0.6",
     "jquery": "^3.1.1",
-    "meta-marked": "^0.4.2"
+    "jquery.qrcode": "^1.0.3",
+    "meta-marked": "^0.4.2",
+    "photoswipe": "^4.1.1"
   }
 }

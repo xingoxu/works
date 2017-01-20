@@ -2,7 +2,7 @@
  * Config
  */
 const config = {
-  outputRoot: '../',
+  outputRoot: '../static/',
 };
 
 
@@ -17,14 +17,17 @@ var path = require('path')
 
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var webpackConfig = {
   entry: {
-    app: './index/app.js',
+    app: path.resolve(__dirname, './app.js'),
   },
   output: {
     filename: 'js/[name].js',
-    // publicPath: 'http://7xin1x.com1.z0.glb.clouddn.com/',
+    chunkFilename: 'js/[name].js',
+    publicPath: 'static/',
+    // publicPath: 'http://7xin1x.com1.z0.glb.clouddn.com/works/',
     path: path.resolve(__dirname, config.outputRoot),
   },
   module: {
@@ -36,20 +39,40 @@ var webpackConfig = {
           helperDirs: [path.resolve(__dirname, './helpers')],
           partialDirs: [path.resolve(__dirname, './partials')]
         }
-      }
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          loader: 'css-loader'
+        })
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        query: {
+          limit: 10000,
+          name: 'img/[name].[hash:7].[ext]',
+        }
+      },
     ]
   },
   plugins: [
+    new ExtractTextPlugin({
+      filename: 'css/bundle.[contenthash:7].css',
+      disable: false,
+      allChunks: true
+    }),
     new HtmlWebpackPlugin({
       template: 'index/index.hbs',
       inject: true,
-      filename: 'index.html',
+      filename: '../index.html',
       indexContent: require('./index-content.js'),
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
-      }
+      },
+      comments: false,
     })
   ]
 };

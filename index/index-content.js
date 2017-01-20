@@ -4,5 +4,7 @@ var contentWithMeta = metaMarked(require('fs').readFileSync(path.join(__dirname,
 
 module.exports = {
   title: contentWithMeta.meta.title,
+  date: contentWithMeta.meta.date,
+  updateDate: new Date(),
   articleEntry: contentWithMeta.html,
 };
