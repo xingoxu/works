@@ -76,7 +76,7 @@ var webpackConfig = {
       allChunks: true
     }),
     new HtmlWebpackPlugin({
-      template: 'index/index.hbs',
+      template: path.resolve(__dirname, './index.hbs'),
       inject: true,
       filename: '../index.html',
       indexContent: require('./index-content.js'),

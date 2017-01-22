@@ -1,10 +1,10 @@
 {
   "name": "work-index",
   "version": "0.0.1",
-  "main": "index/build.js",
+  "main": "index-src/build.js",
   "scripts": {
-    "dev": "node index/build.js dev",
-    "build": "node index/build.js build"
+    "dev": "node index-src/build.js dev",
+    "build": "node index-src/build.js build"
   },
   "repository": "https://github.com/xingoxu/works.git",
   "author": "xingoxu <xingoxu@gmail.com>",
