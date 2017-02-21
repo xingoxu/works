@@ -1,3 +1,6 @@
 [submodule "buy-calc"]
    path = buy-calc
    url = https://github.com/xingoxu/buy-calc
+[submodule "ps4-wallpaper-helper"]
+  path = ps4helper
+  url = https://github.com/xingoxu/ps4-wallpaper-helper
