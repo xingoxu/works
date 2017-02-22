@@ -4,6 +4,8 @@ date: 2015-12-21 13:39:01
 slug: my-works
 toc: false
 ---
+# Electron
+* [PS4 Wallpaper Helper](http://works.xingoxu.com/ps4helper/)
 
 # React.js
 * [日系直邮代购转运费用对比](http://works.xingoxu.com/buy-calc/)
