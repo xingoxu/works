@@ -98,7 +98,7 @@
               {{{ htmlWebpackPlugin.options.indexContent.articleEntry }}}
             </div>
           </div>
-          <div data-url="https://works.xingoxu.com/" data-title="「作品」 | xingo&#39;s private plot" data-tsina="1804320382" data-image="undefined" duoshuo-id="blog-xingoxu" favicon="https://blog.xingoxu.com/favicon.ico" class="article-share">
+          <div data-url="https://works.xingoxu.com/" data-title="「作品」 | xingo&#39;s private plot" data-tsina="1804320382" favicon="https://blog.xingoxu.com/favicon.ico" class="article-share">
             <span class="share-icon" title="分享到"></span>
             <a class="share-icon share-wechat" href="javascript:;"></a>
             <a target="_blank" class="share-icon share-weibo"></a>
@@ -117,24 +117,12 @@
           </div>
         </article>
         <div class="duoshuo">
-          <!-- 多说评论框 start -->
-          <div class="ds-thread" data-thread-key="my-works" data-title="作品" data-url="https://blog.xingoxu.com/works/index.html"></div>
-          <!-- 多说评论框 end -->
-          <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-          <script type="text/javascript">
-          var duoshuoQuery = {
-            short_name: "blog-xingoxu"
-          };
-          (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';
-            ds.async = true;
-            ds.src = ('http:') + '//7xin1x.com1.z0.glb.clouddn.com/blog/duoshuo_embed_beta.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
-          })();
-          </script>
-          <!-- 多说公共JS代码 end -->
+          <div data-thread-key="my-works" data-thread-url="https://blog.xingoxu.com/works/index.html" data-thread-title="作品"></div>
+          <!-- 评论框 end -->
+          <!-- 公共JS代码 start (一个网页只需插入一次) -->
+          <script type="text/javascript" src="http://7xin1x.com1.z0.glb.clouddn.com/comments.js?1490947414953"></script>
+          <script type="text/javascript">comments(document.querySelectorAll('.duoshuo>div')[0])</script>
+          <!-- 公共JS代码 end -->
         </div>
       </div>
       <footer id="footer">
