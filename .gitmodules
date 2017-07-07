@@ -4,6 +4,6 @@
 [submodule "ps4-wallpaper-helper"]
   path = ps4helper
   url = https://github.com/xingoxu/ps4-wallpaper-helper
-[submodule "blog-comment-frontend"]
+[submodule "blog-comment"]
   path = blog-comment
-  url = https://github.com/xingoxu/blog-comment-frontend
+  url = https://github.com/xingoxu/blog-comment
