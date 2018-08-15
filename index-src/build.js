@@ -29,7 +29,7 @@ var webpackConfig = {
     filename: 'js/[name].[chunkhash:3].js',
     chunkFilename: 'js/[name].[chunkhash:3].js',
     publicPath: processEnv == 'dev' ? 'static/' : '/static/',
-    // publicPath: 'http://7xin1x.com1.z0.glb.clouddn.com/works/', 自动上传七牛  待做
+    // publicPath: 'https://static.xingoxu.com/', 自动上传  待做
     path: assetsPath,
   },
   module: {
