@@ -7,3 +7,6 @@
 [submodule "blog-comment"]
   path = blog-comment
   url = https://github.com/xingoxu/blog-comment
+[submodule "tumblr-backup"]
+	path = tumblr-backup
+	url = https://github.com/xingoxu/tumblr-backup
