@@ -23,7 +23,10 @@
   <div class="layout">
     <header class="site-header">
       <div>
-        <a class="site-title" href="/">xingo's works</a>
+        <h1 class="site-title" href="/">xingo's works</h1>
+        <div class="page-meta">
+          <time datetime="{{toISOString updateDate}}">最近更新：{{formatDate updateDate}}</time>
+        </div>
         <p class="site-tagline">一些项目与实验的存档。</p>
       </div>
       <nav class="site-nav" aria-label="Primary">
@@ -34,10 +37,6 @@
     </header>
 
     <main class="content">
-      <div class="page-meta">
-        <time datetime="{{toISOString updateDate}}">最近更新：{{formatDate updateDate}}</time>
-      </div>
-      <h1 class="page-title">{{ title }}</h1>
       <article class="article-entry" itemprop="articleBody">
         {{{ articleEntry }}}
       </article>
