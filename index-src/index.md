@@ -5,7 +5,7 @@ slug: my-works
 toc: false
 ---
 
-# 本站
+# [本站](https://github.com/xingoxu/works)
 
 - handlebar的学习与使用
 - Vite 最小化的构建与实现
