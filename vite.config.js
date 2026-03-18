@@ -4,11 +4,12 @@ const path = require('node:path');
 const { defineConfig } = require('vite');
 const { rootDir, renderSite } = require('./index-src/render-site');
 
+const rootStaticFiles = ['CNAME', '.gitmodules'];
 const watchedFiles = [
   path.join(rootDir, 'index-src/index.hbs'),
   path.join(rootDir, 'index-src/index.md'),
   path.join(rootDir, 'index-src/css/style.css'),
-  path.join(rootDir, 'CNAME'),
+  ...rootStaticFiles.map((file) => path.join(rootDir, file)),
 ];
 
 module.exports = defineConfig({
@@ -37,15 +38,20 @@ module.exports = defineConfig({
         return [];
       },
       async closeBundle() {
-        const from = path.join(rootDir, 'CNAME');
-        const to = path.join(rootDir, 'dist/CNAME');
-        try {
-          await fs.copyFile(from, to);
-        } catch (error) {
-          if (error.code !== 'ENOENT') {
-            throw error;
+        await Promise.all(
+          rootStaticFiles.map(async (file) => {
+            const from = path.join(rootDir, file);
+            const to = path.join(rootDir, 'dist', file);
+            try {
+              await fs.copyFile(from, to);
+            } catch (error) {
+              if (error.code !== 'ENOENT') {
+                throw error;
+              }
+            }
           }
-        }
+          )
+        );
       },
     },
   ],

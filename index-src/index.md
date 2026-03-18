@@ -9,6 +9,7 @@ toc: false
 
 - handlebar的学习与使用
 - Vite 最小化的构建与实现
+- 全程使用Codex Agent进行委托任务，手写 code 几乎很少
 - 可以看到我对所有产品的技术选型的背后思想
 
 # [我的博客](https://blog.xingoxu.com/)
