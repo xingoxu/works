@@ -4,6 +4,7 @@
   "main": "vite.config.js",
   "scripts": {
     "build": "vite build",
+    "build:deploy": "vite build && node scripts/sync-buy-calc.js",
     "dev": "vite"
   },
   "engines": {
