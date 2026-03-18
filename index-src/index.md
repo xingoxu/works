@@ -17,6 +17,13 @@ toc: false
 - Astro + Markdown 静态网页+动态内容的极致实现
 - Github CI 的持续构建，最大化开发体验
 
+# [Whichcard Abroad](https://github.com/xingoxu/whichcard-abroad)
+
+日本信用卡海外使用比较
+
+- Nuxt.js
+- Serverless / 云原生 Function 架构
+
 # [Canvas Contribution](https://github.com/xingoxu/canvas-contribution)
 
 一个基于 Canvas 的前端可视化工具，用来生成类似 GitHub Contribution 的活动热力图，支持自定义数据、颜色和文案，适合做个人数据展示或轻量图表嵌入。
