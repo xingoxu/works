@@ -38,7 +38,7 @@ toc: false
 - Electron的学习，从开发到打包的一整套流程
 - Express.js / Vue.js / Element UI
 
-# [日系直邮代购转运费用对比](https://github.com/xingoxu/buy-calc)
+# [日系直邮代购转运费用对比](http://works.xingoxu.com/buy-calc/)
 
 一个面向日淘和转运场景的费用对比工具，使用 React 构建，帮助用户快速估算不同直邮、代购和转运方案的总成本，降低下单前的决策门槛。
 
