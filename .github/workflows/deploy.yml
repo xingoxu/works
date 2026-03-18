@@ -37,5 +37,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: master
           publish_dir: ./dist
-          force_orphan: true
           enable_jekyll: false
