@@ -9,6 +9,7 @@ toc: false
 
 - handlebar的学习与使用
 - Vite 最小化的构建与实现
+- 可以看到我对所有产品的技术选型的背后思想
 
 # [我的博客](https://blog.xingoxu.com/)
 
